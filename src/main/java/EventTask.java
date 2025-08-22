@@ -3,8 +3,7 @@ class EventTask extends Task{
     String to;
 
     public EventTask(String description, String from, String to) {
-        String temp = description + " (from: " + from + " to: " + to + ")";
-        super(temp, TaskType.E);
+        super(description + " (from: " + from + " to: " + to + ")", TaskType.E);
         this.from = from;
         this.to = to;
     }
