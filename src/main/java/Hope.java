@@ -16,7 +16,7 @@ public class Hope {
 
             StringBuilder sb = new StringBuilder();
             for(int i = 0; i < size(); i++) {
-                sb.append(i + 1).append(".").append(get(i).toString()).append("\n");
+                sb.append(i + 1).append(". ").append(get(i).toString()).append("\n");
             }
             return sb.toString();
         };
@@ -51,7 +51,7 @@ public class Hope {
     static class endCommand implements Command {
         @Override
         public void execute(Object o) {
-            System.out.println("See you soon!");
+            System.out.println("Fare thee well, noble friend!");
             online = false;
         }
     }
@@ -60,19 +60,17 @@ public class Hope {
         @Override
         public void execute(Object o) {
             String input = (String) o;
-            if(input.equals("todo")) {
-                System.out.println("What are you trying todo?\n");
-                return;
-            }
-            if(input.equals("")) {
-                System.out.println("empty input, try again");
+            if(input.equals("") || input.equals("todo")) {
+                System.out.println("Thou hast overlooked the noble task of bestowing a worthy description upon this endeavor!");
+                System.out.println("(Empty input detected, please try again)\n");
                 return;
             }
             ToDoTask temp = new ToDoTask((String) o);
             toDoList.add(temp);
-            System.out.println("Added this task:"+ "\n");
+            System.out.println("Behold, this quest hath been entrusted!");
             System.out.println(temp.toString() + "\n");
-            System.out.println("You now have " + toDoList.size() + " tasks in the list\n");
+            System.out.println("Lo! Thou art now bestowed with " + toDoList.size() + " noble quests upon thy parchment of duties.");
+            System.out.println("(You now have " + toDoList.size() + " tasks in the list)\n");
         }
     }
 
@@ -81,19 +79,22 @@ public class Hope {
         public void execute(Object o) {
             String input = (String) o;
             if(input.equals("deadline")) {
-                System.out.println("Looks like you forgot to input a description and a deadline! Try again\n");
+                System.out.println("Thou hast overlooked the noble task of bestowing a worthy description upon this endeavor!");
+                System.out.println("(Looks like you forgot to input a description and a deadline! Try again)\n");
                 return;
             }
             String[] info = input.split("/by");
             if(info.length == 1) {
-                System.out.println("Incorrect input, please try again\n");
+                System.out.println("Verily, thou hast erred in thy response; endeavor once more, brave soul!");
+                System.out.println("(Incorrect input, please try again)\n");
                 return;
             }
             DeadlineTask temp = new DeadlineTask(info[0].trim(), info[1].trim());
             toDoList.add(temp);
-            System.out.println("Added this task:"+ "\n");
+            System.out.println("Behold, this quest hath been entrusted!");
             System.out.println(temp.toString() + "\n");
-            System.out.println("You now have " + toDoList.size() + " tasks in the list\n");
+            System.out.println("Lo! Thou art now bestowed with " + toDoList.size() + " noble quests upon thy parchment of duties.");
+            System.out.println("(You now have " + toDoList.size() + " tasks in the list)\n");
         }
     }
 
@@ -102,33 +103,39 @@ public class Hope {
         public void execute(Object o) {
             String input = (String) o;
             if(input.equals("event")) {
-                System.out.println("Looks like you forgot to input description, from and to! Try again\n");
+                System.out.println("Thou hast overlooked the noble task of bestowing a worthy description upon this endeavor!");
+                System.out.println("(Looks like you forgot to input description, from and to! Try again)\n");
                 return;
             }
             String[] info = input.split("/from");
             if(info.length == 1) {
-                System.out.println("Incorrect input, please try again\n");
+                System.out.println("Alas, fair traveler, thy input bears a flaw; kindly make haste and attempt anew!");
+                System.out.println("(Incorrect input, please try again)\n");
                 return;
             }
             String[] times = info[1].split("/to");
             if(times.length == 1) {
-                System.out.println("Incorrect input, please try again\n");
+                System.out.println("Alas, fair traveler, thy input bears a flaw; kindly make haste and attempt anew!");
+                System.out.println("(Incorrect input, please try again)\n");
                 return;
             }
             EventTask temp = new EventTask(info[0].trim(), times[0].trim(), times[1].trim());
             toDoList.add(temp);
-            System.out.println("Added this task:"+ "\n");
+            System.out.println("Behold, this quest hath been entrusted!:");
             System.out.println(temp.toString() + "\n");
-            System.out.println("You now have " + toDoList.size() + " tasks in the list\n");
+            System.out.println("Lo! Thou art now bestowed with " + toDoList.size() + " noble quests upon thy parchment of duties.");
+            System.out.println("(You now have " + toDoList.size() + " tasks in the to do list)\n");
         }
     }
 
     static class listCommand implements Command {
         public void execute(Object o) {
             if(toDoList.size() == 0) {
-                System.out.println("You have 0 tasks\n");
+                System.out.println("Thou art unburdened by quests in this moment, dear knight.\n"
+                        + "(There are currently no tasks in your to do list)\n");
                 return;
             }
+            System.out.println("Hark! Behold the noble quests that grace thy scroll of undertakings!\n");
             System.out.println(toDoList.toString());
         }
     }
@@ -141,20 +148,22 @@ public class Hope {
                 try {
                     int input = Integer.parseInt((String) o);
                 } catch (NumberFormatException e) {
-                    System.out.println("Woah please use numerics as input\n");
+                    System.out.println("Pray, employ the noble digits as thy guiding input!\n"
+                            + "(Please use numerics as input only)\n");
                     return;
                 }
                 int input = Integer.parseInt((String) o);
                 if(input > toDoList.size() - 1) {
-                    System.out.println("Woah you don't have that many tasks, try again\n");
+                    System.out.println("Thy request doth stray beyond the hallowed limits.\n"
+                            + "(The number you have input is greater than the number of tasks you currently have)\n");
                     return;
                 }
                 if(input < 1) {
-                    System.out.println("Woah why are you trying to test my code, try again\n");
-                    return;
+                    System.out.println("Doth this be a jest, good sir?\n"
+                            + "(Negative numbers are not accepted as input)\n");                    return;
                 }
                 toDoList.get(input - 1).markAsDone();
-                System.out.println("Alrighty, marked #" + input + " as done\n");
+                System.out.println("Hark, I declare the #" + input + " noble endeavor accomplished!");
                 System.out.println(toDoList.get(input - 1) + "\n");
             }
         }
@@ -168,20 +177,22 @@ public class Hope {
                 try {
                     int input = Integer.parseInt((String) o);
                 } catch (NumberFormatException e) {
-                    System.out.println("Woah please use numerics as input\n");
+                    System.out.println("Pray, employ the noble digits as thy guiding input!\n"
+                            + "(Please use numerics as input only)\n");
                     return;
                 }
                 int input = Integer.parseInt((String) o);
                 if(input > toDoList.size() - 1) {
-                    System.out.println("Woah you don't have that many tasks, try again\n");
-                    return;
+                    System.out.println("Thy request doth stray beyond the hallowed limits.\n"
+                            + "(The number you have input is greater than the number of tasks you currently have)\n");                    return;
                 }
                 if(input < 1) {
-                    System.out.println("Woah why are you trying to test my code, try again\n");
+                    System.out.println("Doth this be a jest, good sir?\n"
+                            + "(Negative numbers are not accepted as input)\n");
                     return;
                 }
                 toDoList.get(input - 1).unmark();
-                System.out.println("Alrighty, marked #" + input + " as undone\n");
+                System.out.println("Lo! The noble quest, task #" + input + " , doth still beckon thy valorous attention!");
                 System.out.println(toDoList.get(input - 1) + "\n");
             }
         }
@@ -189,7 +200,7 @@ public class Hope {
 
 
     public static void main(String[] args) {
-        System.out.println("Hello! I'm Hope\n" + "What can i do for you?\n");
+        System.out.println("Greetings, fair wanderer! I am Hope, your humble companion\n" + "How might I assist thee on this grand quest?\n");
         Scanner userInput = new Scanner(System.in);
         while(online) {
             String input = userInput.nextLine();
@@ -200,7 +211,7 @@ public class Hope {
                 EXECUTECOMMAND.get(inputCommand).execute(argument.trim());
                 continue;
             }
-            System.out.println("I'm sorry, i don't know what you mean\n");
+            System.out.println("Pardon me, noble companion, but what dost thou mean to convey?\n");
             continue;
         }
 
