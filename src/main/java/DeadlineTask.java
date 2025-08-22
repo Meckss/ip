@@ -1,5 +1,10 @@
 class DeadlineTask extends Task {
-    public DeadlineTask(String description) {
-        super(description, TaskType.D);
+    String deadline;
+
+    public DeadlineTask(String description, String deadline) {
+        String temp = description + " (by: " + deadline + ")";
+        super(temp, TaskType.D);
+        this.deadline = deadline;
     }
+
 }

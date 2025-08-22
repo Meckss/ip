@@ -26,7 +26,10 @@ public class Hope {
             "bye",
             "list",
             "mark",
-            "unmark"
+            "unmark",
+            "todo",
+            "deadline",
+            "event"
     );
 
     private static final HashMap<String, Command> EXECUTECOMMAND= new HashMap<>();
@@ -36,6 +39,9 @@ public class Hope {
         EXECUTECOMMAND.put("list", new listCommand());
         EXECUTECOMMAND.put("mark", new markCommand());
         EXECUTECOMMAND.put("unmark", new unmarkCommand());
+        EXECUTECOMMAND.put("todo", new addTDTask());
+        EXECUTECOMMAND.put("deadline", new addDTask());
+        EXECUTECOMMAND.put("event", new addETask());
     }
 
     interface Command {
@@ -50,11 +56,52 @@ public class Hope {
         }
     }
 
-    static class addCommand implements Command {
+//    static class addCommand implements Command {
+//        public void execute(Object o) {
+//            // assume for now that valid input always, will handle exceptions later on
+//            toDoList.add(new Task((String)o));
+//            System.out.println("added: " + (String)o + "\n");
+//        }
+//    }
+
+    static class addTDTask implements Command{
+        @Override
         public void execute(Object o) {
             // assume for now that valid input always, will handle exceptions later on
-            toDoList.add(new Task((String)o));
-            System.out.println("added: " + (String)o + "\n");
+            ToDoTask temp = new ToDoTask((String) o);
+            toDoList.add(temp);
+            System.out.println("Added this task: "+ "\n");
+            System.out.println(temp.toString() + "\n");
+            System.out.println("You now have " + toDoList.size() + " tasks in the list");
+        }
+    }
+
+    static class addDTask implements Command{
+        @Override
+        public void execute(Object o) {
+            // assume for now that valid input always, will handle exceptions later on
+            String input = (String) o;
+            String[] info = input.split("/by");
+            DeadlineTask temp = new DeadlineTask(info[0].trim(), info[1].trim());
+            toDoList.add(temp);
+            System.out.println("Added this task: "+ "\n");
+            System.out.println(temp.toString() + "\n");
+            System.out.println("You now have " + toDoList.size() + " tasks in the list");
+        }
+    }
+
+    static class addETask implements Command{
+        @Override
+        public void execute(Object o) {
+            // assume for now that valid input always, will handle exceptions later on
+            String input = (String) o;
+            String[] info = input.split("/from");
+            String[] times = info[1].split("/to");
+            EventTask temp = new EventTask(info[0].trim(), times[0].trim(), times[1].trim());
+            toDoList.add(temp);
+            System.out.println("Added this task: "+ "\n");
+            System.out.println(temp.toString() + "\n");
+            System.out.println("You now have " + toDoList.size() + " tasks in the list");
         }
     }
 
@@ -103,8 +150,6 @@ public class Hope {
                 EXECUTECOMMAND.get(inputCommand).execute(argument);
                 continue;
             }
-
-            new addCommand().execute(input);
         }
 
     }
