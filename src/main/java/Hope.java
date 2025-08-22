@@ -7,15 +7,31 @@ import java.util.ArrayList;
 public class Hope {
 
     private static boolean online = true;
-    private static List<String> toDoList = new ArrayList<>();
+    private static List<String> toDoList = new ArrayList<>() {
+        @Override
+        public String toString() {
+            if(isEmpty()) {
+                return "";
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0; i < size(); i++) {
+                sb.append(i + 1).append(". ").append(get(i)).append("\n");
+            }
+            return sb.toString();
+        };
+    };
+
     private static final Set<String> COMMANDS = Set.of(
-            "bye"
+            "bye",
+            "list"
     );
 
     private static final HashMap<String, Command> EXECUTECOMMAND= new HashMap<>();
 
     static {
         EXECUTECOMMAND.put("bye", new endCommand());
+        EXECUTECOMMAND.put("list", new listCommand());
     }
 
     interface Command {
@@ -35,6 +51,12 @@ public class Hope {
             // assume for now that valid input always, will handle exceptions later on
             toDoList.add((String)o);
             System.out.println("added: " + (String)o + "\n");
+        }
+    }
+
+    static class listCommand implements Command {
+        public void execute(Object o) {
+            System.out.println(toDoList.toString());
         }
     }
 
