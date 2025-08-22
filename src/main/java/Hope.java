@@ -70,7 +70,7 @@ public class Hope {
             // assume for now that valid input always, will handle exceptions later on
             ToDoTask temp = new ToDoTask((String) o);
             toDoList.add(temp);
-            System.out.println("Added this task: "+ "\n");
+            System.out.println("Added this task:"+ "\n");
             System.out.println(temp.toString() + "\n");
             System.out.println("You now have " + toDoList.size() + " tasks in the list\n");
         }
@@ -84,7 +84,7 @@ public class Hope {
             String[] info = input.split("/by");
             DeadlineTask temp = new DeadlineTask(info[0].trim(), info[1].trim());
             toDoList.add(temp);
-            System.out.println("Added this task: "+ "\n");
+            System.out.println("Added this task:"+ "\n");
             System.out.println(temp.toString() + "\n");
             System.out.println("You now have " + toDoList.size() + " tasks in the list\n");
         }
@@ -99,7 +99,7 @@ public class Hope {
             String[] times = info[1].split("/to");
             EventTask temp = new EventTask(info[0].trim(), times[0].trim(), times[1].trim());
             toDoList.add(temp);
-            System.out.println("Added this task: "+ "\n");
+            System.out.println("Added this task:"+ "\n");
             System.out.println(temp.toString() + "\n");
             System.out.println("You now have " + toDoList.size() + " tasks in the list\n");
         }
@@ -139,7 +139,7 @@ public class Hope {
 
 
     public static void main(String[] args) {
-        System.out.println("Hello! I'm Hope \n" + "What can i do for you? \n");
+        System.out.println("Hello! I'm Hope\n" + "What can i do for you?\n");
         Scanner userInput = new Scanner(System.in);
         while(online) {
             String input = userInput.nextLine();
