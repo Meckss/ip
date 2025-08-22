@@ -116,6 +116,10 @@ public class Hope {
 
     static class listCommand implements Command {
         public void execute(Object o) {
+            if(toDoList.size() == 0) {
+                System.out.println("You have 0 tasks\n");
+                return;
+            }
             System.out.println(toDoList.toString());
         }
     }
@@ -125,7 +129,21 @@ public class Hope {
         public void execute(Object o) {
             // assume for now that valid input always, will handle exceptions later on
             if (o instanceof String) {
+                try {
+                    int input = Integer.parseInt((String) o);
+                } catch (NumberFormatException e) {
+                    System.out.println("Woah please use numerics as input\n");
+                    return;
+                }
                 int input = Integer.parseInt((String) o);
+                if(input > toDoList.size() - 1) {
+                    System.out.println("Woah you don't have that many tasks, try again\n");
+                    return;
+                }
+                if(input < 1) {
+                    System.out.println("Woah why are you trying to test my code, try again\n");
+                    return;
+                }
                 toDoList.get(input - 1).markAsDone();
                 System.out.println("Alrighty, marked #" + input + " as done\n");
                 System.out.println(toDoList.get(input - 1) + "\n");
@@ -138,7 +156,21 @@ public class Hope {
         public void execute(Object o) {
             // assume for now that valid input always, will handle exceptions later on
             if (o instanceof String) {
+                try {
+                    int input = Integer.parseInt((String) o);
+                } catch (NumberFormatException e) {
+                    System.out.println("Woah please use numerics as input\n");
+                    return;
+                }
                 int input = Integer.parseInt((String) o);
+                if(input > toDoList.size() - 1) {
+                    System.out.println("Woah you don't have that many tasks, try again\n");
+                    return;
+                }
+                if(input < 1) {
+                    System.out.println("Woah why are you trying to test my code, try again\n");
+                    return;
+                }
                 toDoList.get(input - 1).unmark();
                 System.out.println("Alrighty, marked #" + input + " as undone\n");
                 System.out.println(toDoList.get(input - 1) + "\n");
@@ -159,6 +191,7 @@ public class Hope {
                 EXECUTECOMMAND.get(inputCommand).execute(argument);
                 continue;
             }
+            System.out.println("I'm sorry, i don't know what you mean\n");
             continue;
         }
 
