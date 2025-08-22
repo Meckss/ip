@@ -72,7 +72,7 @@ public class Hope {
             toDoList.add(temp);
             System.out.println("Added this task: "+ "\n");
             System.out.println(temp.toString() + "\n");
-            System.out.println("You now have " + toDoList.size() + " tasks in the list");
+            System.out.println("You now have " + toDoList.size() + " tasks in the list\n");
         }
     }
 
@@ -86,7 +86,7 @@ public class Hope {
             toDoList.add(temp);
             System.out.println("Added this task: "+ "\n");
             System.out.println(temp.toString() + "\n");
-            System.out.println("You now have " + toDoList.size() + " tasks in the list");
+            System.out.println("You now have " + toDoList.size() + " tasks in the list\n");
         }
     }
 
@@ -101,7 +101,7 @@ public class Hope {
             toDoList.add(temp);
             System.out.println("Added this task: "+ "\n");
             System.out.println(temp.toString() + "\n");
-            System.out.println("You now have " + toDoList.size() + " tasks in the list");
+            System.out.println("You now have " + toDoList.size() + " tasks in the list\n");
         }
     }
 
@@ -119,7 +119,7 @@ public class Hope {
                 int input = Integer.parseInt((String) o);
                 toDoList.get(input - 1).markAsDone();
                 System.out.println("Alrighty, marked #" + input + " as done\n");
-                System.out.println(toDoList.get(input - 1));
+                System.out.println(toDoList.get(input - 1) + "\n");
             }
         }
     }
