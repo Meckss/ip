@@ -48,9 +48,7 @@ public class Hope {
             String argument = instructions.length == 2 ? instructions[1] : input;
             if(COMMANDS.contains(inputCommand)) {
                 EXECUTECOMMAND.get(inputCommand).execute(argument);
-                if(!online) {
-                    break;
-                }
+                break;
             }
 
             new addCommand().execute(input);
