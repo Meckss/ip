@@ -24,7 +24,8 @@ public class Hope {
 
     private static final Set<String> COMMANDS = Set.of(
             "bye",
-            "list"
+            "list",
+            "mark"
     );
 
     private static final HashMap<String, Command> EXECUTECOMMAND= new HashMap<>();
@@ -32,6 +33,7 @@ public class Hope {
     static {
         EXECUTECOMMAND.put("bye", new endCommand());
         EXECUTECOMMAND.put("list", new listCommand());
+        EXECUTECOMMAND.put("mark", new markCommand());
     }
 
     interface Command {
@@ -57,6 +59,19 @@ public class Hope {
     static class listCommand implements Command {
         public void execute(Object o) {
             System.out.println(toDoList.toString());
+        }
+    }
+
+    static class markCommand implements Command {
+        @Override
+        public void execute(Object o) {
+            // assume for now that valid input always, will handle exceptions later on
+            if (o instanceof String) {
+                int input = Integer.parseInt((String) o);
+                toDoList.get(input - 1).markAsDone();
+                System.out.println("Alrighty, marked #" + input + " as done\n");
+                System.out.println(toDoList.get(input - 1));
+            }
         }
     }
 
