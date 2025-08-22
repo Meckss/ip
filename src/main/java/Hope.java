@@ -59,7 +59,6 @@ public class Hope {
     static class addTDTask implements Command{
         @Override
         public void execute(Object o) {
-            // assume for now that valid input always, will handle exceptions later on
             ToDoTask temp = new ToDoTask((String) o);
             toDoList.add(temp);
             System.out.println("Added this task:"+ "\n");
@@ -71,9 +70,16 @@ public class Hope {
     static class addDTask implements Command{
         @Override
         public void execute(Object o) {
-            // assume for now that valid input always, will handle exceptions later on
             String input = (String) o;
+            if(input.equals("deadline")) {
+                System.out.println("Looks like you forgot to input a description and a deadline! Try again\n");
+                return;
+            }
             String[] info = input.split("/by");
+            if(info.length == 1) {
+                System.out.println("Incorrect input, please try again\n");
+                return;
+            }
             DeadlineTask temp = new DeadlineTask(info[0].trim(), info[1].trim());
             toDoList.add(temp);
             System.out.println("Added this task:"+ "\n");
@@ -85,10 +91,21 @@ public class Hope {
     static class addETask implements Command{
         @Override
         public void execute(Object o) {
-            // assume for now that valid input always, will handle exceptions later on
             String input = (String) o;
+            if(input.equals("event")) {
+                System.out.println("Looks like you forgot to input description, from and to! Try again\n");
+                return;
+            }
             String[] info = input.split("/from");
+            if(info.length == 1) {
+                System.out.println("Incorrect input, please try again\n");
+                return;
+            }
             String[] times = info[1].split("/to");
+            if(times.length == 1) {
+                System.out.println("Incorrect input, please try again\n");
+                return;
+            }
             EventTask temp = new EventTask(info[0].trim(), times[0].trim(), times[1].trim());
             toDoList.add(temp);
             System.out.println("Added this task:"+ "\n");
