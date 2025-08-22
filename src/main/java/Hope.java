@@ -145,7 +145,6 @@ public class Hope {
     static class markCommand implements Command {
         @Override
         public void execute(Object o) {
-            // assume for now that valid input always, will handle exceptions later on
             if (o instanceof String) {
                 try {
                     int input = Integer.parseInt((String) o);
@@ -162,7 +161,8 @@ public class Hope {
                 }
                 if(input < 1) {
                     System.out.println("Doth this be a jest, good sir?\n"
-                            + "(Negative numbers are not accepted as input)\n");                    return;
+                            + "(Negative numbers are not accepted as input)\n");
+                    return;
                 }
                 try {
                     toDoList.get(input - 1).markAsDone();
@@ -180,7 +180,6 @@ public class Hope {
     static class unmarkCommand implements Command {
         @Override
         public void execute(Object o) {
-            // assume for now that valid input always, will handle exceptions later on
             if (o instanceof String) {
                 try {
                     int input = Integer.parseInt((String) o);
@@ -192,7 +191,8 @@ public class Hope {
                 int input = Integer.parseInt((String) o);
                 if(input > toDoList.size()) {
                     System.out.println("Thy request doth stray beyond the hallowed limits.\n"
-                            + "(The number you have input is greater than the number of tasks you currently have)\n");                    return;
+                            + "(The number you have input is greater than the number of tasks you currently have)\n");
+                    return;
                 }
                 if(input < 1) {
                     System.out.println("Doth this be a jest, good sir?\n"
