@@ -140,8 +140,8 @@ public class Hope {
 
     public static void main(String[] args) {
         System.out.println("Hello! I'm Hope \n" + "What can i do for you? \n");
+        Scanner userInput = new Scanner(System.in);
         while(online) {
-            Scanner userInput = new Scanner(System.in);
             String input = userInput.nextLine();
             String[] instructions = input.split(" ", 2);
             String inputCommand = instructions[0];
@@ -150,6 +150,7 @@ public class Hope {
                 EXECUTECOMMAND.get(inputCommand).execute(argument);
                 continue;
             }
+            continue;
         }
 
     }
