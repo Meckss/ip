@@ -19,14 +19,22 @@ public class Hope {
     }
 
     interface Command {
-        void execute();
+        void execute(Object o);
     }
 
     static class endCommand implements Command {
         @Override
-        public void execute() {
+        public void execute(Object o) {
             System.out.println("See you soon!");
             online = false;
+        }
+    }
+
+    static class addCommand implements Command {
+        public void execute(Object o) {
+            // assume for now that valid input always, will handle exceptions later on
+            toDoList.add((String)o);
+            System.out.println("added: " + (String)o + "\n");
         }
     }
 
@@ -34,14 +42,18 @@ public class Hope {
         System.out.println("Hello! I'm Hope \n" + "What can i do for you? \n");
         while(online) {
             Scanner userInput = new Scanner(System.in);
-            String instruction = userInput.nextLine();
-            if(COMMANDS.contains(instruction)) {
-                EXECUTECOMMAND.get(instruction).execute();
+            String input = userInput.nextLine();
+            String[] instructions = input.split(" ", 2);
+            String inputCommand = instructions[0];
+            String argument = instructions.length == 2 ? instructions[1] : input;
+            if(COMMANDS.contains(inputCommand)) {
+                EXECUTECOMMAND.get(inputCommand).execute(argument);
                 if(!online) {
                     break;
                 }
             }
-            System.out.println(instruction +"\n");
+
+            new addCommand().execute(input);
         }
 
     }
