@@ -1,5 +1,5 @@
 class EventTask extends Task{
     public EventTask(String description) {
-        super(description);
+        super(description, TaskType.E);
     }
 }
