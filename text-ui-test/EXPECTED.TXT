@@ -1,37 +1,41 @@
-Hello! I'm Hope
-What can i do for you?
+Greetings, fair wanderer! I am Hope, your humble companion
+How might I assist thee on this grand quest?
 
-Added this task:
-
+Behold, this quest hath been entrusted!
 [T] [ ] dishes
 
-You now have 1 tasks in the list
+Lo! Thou art now bestowed with 1 noble quests upon thy parchment of duties.
+(You now have 1 tasks in the list)
 
-Added this task:
-
+Behold, this quest hath been entrusted!
 [D] [ ] homework (by: today)
 
-You now have 2 tasks in the list
+Lo! Thou art now bestowed with 2 noble quests upon thy parchment of duties.
+(You now have 2 tasks in the list)
 
-Alrighty, marked #2 as done
-
+Hark, I declare the #2 noble endeavor accomplished!
 [D] [X] homework (by: today)
 
-1.[T] [ ] dishes
-2.[D] [X] homework (by: today)
+Hark! Behold the noble quests that grace thy scroll of undertakings!
 
-Added this task:
+1. [T] [ ] dishes
+2. [D] [X] homework (by: today)
 
+Behold, this quest hath been entrusted!:
 [E] [ ] CCA (from: monday 2pm to: monday 4pm)
 
-You now have 3 tasks in the list
+Lo! Thou art now bestowed with 3 noble quests upon thy parchment of duties.
+(You now have 3 tasks in the to do list)
 
-Alrighty, marked #3 as done
-
+Hark, I declare the #3 noble endeavor accomplished!
 [E] [X] CCA (from: monday 2pm to: monday 4pm)
 
-Alrighty, marked #2 as undone
-
+Lo! The noble quest, task #2 , doth still beckon thy valorous attention!
 [D] [ ] homework (by: today)
 
-See you soon!
+Pardon me, noble companion, but what dost thou mean to convey?
+
+Thou hast overlooked the noble task of bestowing a worthy description upon this endeavor!
+(Empty input detected, please try again)
+
+Fare thee well, noble friend!
