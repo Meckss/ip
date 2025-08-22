@@ -56,14 +56,6 @@ public class Hope {
         }
     }
 
-//    static class addCommand implements Command {
-//        public void execute(Object o) {
-//            // assume for now that valid input always, will handle exceptions later on
-//            toDoList.add(new Task((String)o));
-//            System.out.println("added: " + (String)o + "\n");
-//        }
-//    }
-
     static class addTDTask implements Command{
         @Override
         public void execute(Object o) {
