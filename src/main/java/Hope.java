@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Hope {
 
     private static boolean online = true;
-    private static List<String> toDoList = new ArrayList<>() {
+    private static List<Task> toDoList = new ArrayList<>() {
         @Override
         public String toString() {
             if(isEmpty()) {
@@ -16,7 +16,7 @@ public class Hope {
 
             StringBuilder sb = new StringBuilder();
             for(int i = 0; i < size(); i++) {
-                sb.append(i + 1).append(". ").append(get(i)).append("\n");
+                sb.append(i + 1).append(".").append(get(i).toString()).append("\n");
             }
             return sb.toString();
         };
@@ -49,7 +49,7 @@ public class Hope {
     static class addCommand implements Command {
         public void execute(Object o) {
             // assume for now that valid input always, will handle exceptions later on
-            toDoList.add((String)o);
+            toDoList.add(new Task((String)o));
             System.out.println("added: " + (String)o + "\n");
         }
     }
@@ -57,6 +57,31 @@ public class Hope {
     static class listCommand implements Command {
         public void execute(Object o) {
             System.out.println(toDoList.toString());
+        }
+    }
+
+    static class Task {
+        protected String description;
+        protected boolean isDone;
+
+        public Task(String description) {
+            this.description = description;
+            this.isDone = false;
+        }
+
+        public String getStatusIcon() {
+            return isDone ? "X" : " ";
+        }
+
+        protected void markAsDone() {
+            this.isDone = true;
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append("[").append(this.getStatusIcon()).append("] ").append(this.description);
+            return sb.toString();
         }
     }
 
