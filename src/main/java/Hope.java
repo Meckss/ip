@@ -59,6 +59,15 @@ public class Hope {
     static class addTDTask implements Command{
         @Override
         public void execute(Object o) {
+            String input = (String) o;
+            if(input.equals("todo")) {
+                System.out.println("What are you trying todo?\n");
+                return;
+            }
+            if(input.equals("")) {
+                System.out.println("empty input, try again");
+                return;
+            }
             ToDoTask temp = new ToDoTask((String) o);
             toDoList.add(temp);
             System.out.println("Added this task:"+ "\n");
@@ -188,7 +197,7 @@ public class Hope {
             String inputCommand = instructions[0];
             String argument = instructions.length == 2 ? instructions[1] : input;
             if(COMMANDS.contains(inputCommand)) {
-                EXECUTECOMMAND.get(inputCommand).execute(argument);
+                EXECUTECOMMAND.get(inputCommand).execute(argument.trim());
                 continue;
             }
             System.out.println("I'm sorry, i don't know what you mean\n");
