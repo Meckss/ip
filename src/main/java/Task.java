@@ -22,11 +22,17 @@ abstract class Task {
         return "[" + type + "]";
     }
 
-    protected void markAsDone() {
+    protected void markAsDone() throws RedundantStateChangeException {
+        if(this.isDone) {
+            throw new RedundantStateChangeException("");
+        }
         this.isDone = true;
     }
 
-    protected void unmark() {
+    protected void unmark() throws RedundantStateChangeException {
+        if(!this.isDone) {
+            throw new RedundantStateChangeException("");
+        }
         this.isDone = false;
     }
 
