@@ -1,14 +1,16 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.Temporal;
 import java.util.Date;
 import java.util.List;
 
 
 public class MaybeDate {
     private String description;
-    private LocalDate date;
+    private Temporal date;
 
 
     private static final List<DateTimeFormatter> supportedFormats = List.of(
@@ -20,23 +22,25 @@ public class MaybeDate {
     );
 
 
-    private static final DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private static final DateTimeFormatter outputDateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private static final DateTimeFormatter outputDateTimeFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
 
 
-    private MaybeDate(LocalDate date, String description) {
+    private MaybeDate(LocalDateTime date, String description) {
         this.date = date;
         this.description = description;
     }
 
 
     public static MaybeDate parse(String input) {
-        LocalDate temp = null;
+        LocalDateTime temp = null;
         DateTimeFormatterBuilder dateTimeFormatterBuilder = new DateTimeFormatterBuilder();
         for(DateTimeFormatter format : supportedFormats) {
             dateTimeFormatterBuilder.appendOptional(format);
         }
+        dateTimeFormatterBuilder.optionalStart().appendOptional(DateTimeFormatter.ofPattern(" HH:mm")).appendOptional(DateTimeFormatter.ofPattern(" HHmm")).optionalEnd();
         try {
-            temp = LocalDate.parse(input, dateTimeFormatterBuilder.toFormatter());
+            temp = LocalDateTime.parse(input, dateTimeFormatterBuilder.toFormatter());
             return new MaybeDate(temp, null);
         } catch (DateTimeParseException e) {
 
@@ -51,7 +55,13 @@ public class MaybeDate {
         if(date == null) {
             return description;
         } else {
-            return outputFormat.format(date);
+            if(date instanceof LocalDate){
+                return outputDateFormat.format(date);
+            }
+            if( date instanceof LocalDateTime) {
+                return outputDateTimeFormat.format(date);
+            }
         }
+        return description;
     }
 }
