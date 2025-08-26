@@ -8,5 +8,20 @@ class EventTask extends Task{
         this.to = to;
     }
 
+    @Override
+    public String format() {
+        int status;
+
+        if(this.isDone) {
+            status = 1;
+        } else {
+            status = 0;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(type).append("|").append(status).append("|").append(description).append("|").append(from).append("|").append(to);
+        return sb.toString();
+    }
+
 
 }

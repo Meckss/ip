@@ -1,4 +1,4 @@
-abstract class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected enum TaskType {
@@ -34,6 +34,20 @@ abstract class Task {
             throw new RedundantStateChangeException("");
         }
         this.isDone = false;
+    }
+
+    public String format() {
+        int status;
+
+        if(this.isDone) {
+            status = 1;
+        } else {
+            status = 0;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(type).append("|").append(status).append("|").append(description);
+        return sb.toString();
     }
 
     @Override
