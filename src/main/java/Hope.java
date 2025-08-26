@@ -3,23 +3,17 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.File;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 
 public class Hope {
-
+    private static final File data = new File("./data/Hope.txt");
+    private static final TaskStorage taskStorage = new TaskStorage(data);
     private static boolean online = true;
-    private static List<Task> toDoList = new ArrayList<>() {
-        @Override
-        public String toString() {
-            if(isEmpty()) {
-                return "";
-            }
+    private static ToDoList toDoList = new ToDoList(taskStorage.toList()); {
 
-            StringBuilder sb = new StringBuilder();
-            for(int i = 0; i < size(); i++) {
-                sb.append(i + 1).append(". ").append(get(i).toString()).append("\n");
-            }
-            return sb.toString();
-        };
     };
 
     private static final Set<String> COMMANDS = Set.of(
@@ -62,13 +56,14 @@ public class Hope {
         @Override
         public void execute(Object o) {
             String input = (String) o;
-            if(input.equals("") || input.equals("todo")) {
+            if(input.isEmpty() || input.equals("todo")) {
                 System.out.println("Thou hast overlooked the noble task of bestowing a worthy description upon this endeavor!");
                 System.out.println("(Empty input detected, please try again)\n");
                 return;
             }
-            ToDoTask temp = new ToDoTask((String) o);
+            ToDoTask temp = new ToDoTask(input);
             toDoList.add(temp);
+            taskStorage.append(temp);
             System.out.println("Behold, this quest hath been entrusted!");
             System.out.println(temp.toString() + "\n");
             System.out.println("Lo! Thou art now bestowed with " + toDoList.size() + " noble quests upon thy parchment of duties.");
@@ -93,6 +88,7 @@ public class Hope {
             }
             DeadlineTask temp = new DeadlineTask(info[0].trim(), info[1].trim());
             toDoList.add(temp);
+            taskStorage.append(temp);
             System.out.println("Behold, this quest hath been entrusted!");
             System.out.println(temp.toString() + "\n");
             System.out.println("Lo! Thou art now bestowed with " + toDoList.size() + " noble quests upon thy parchment of duties.");
@@ -123,6 +119,7 @@ public class Hope {
             }
             EventTask temp = new EventTask(info[0].trim(), times[0].trim(), times[1].trim());
             toDoList.add(temp);
+            taskStorage.append(temp);
             System.out.println("Behold, this quest hath been entrusted!:");
             System.out.println(temp.toString() + "\n");
             System.out.println("Lo! Thou art now bestowed with " + toDoList.size() + " noble quests upon thy parchment of duties.");
@@ -171,6 +168,7 @@ public class Hope {
                     System.out.println("(The task was already marked to begin with)\n");
                     return;
                 }
+                taskStorage.update(toDoList);
                 System.out.println("Hark, I declare the #" + input + " noble endeavor accomplished!");
                 System.out.println(toDoList.get(input - 1) + "\n");
             }
@@ -206,6 +204,7 @@ public class Hope {
                     System.out.println("(The task was already unmarked to begin with)\n");
                     return;
                 }
+                taskStorage.update(toDoList);
                 System.out.println("Lo! The noble quest, task #" + input + " , doth still beckon thy valorous attention!");
                 System.out.println(toDoList.get(input - 1) + "\n");
             }
@@ -239,6 +238,7 @@ public class Hope {
                 System.out.println("Heed this decree! This noble quest hath been cast aside.");
                 System.out.println(toDoList.get(input).toString());
                 toDoList.remove(input - 1);
+                taskStorage.update(toDoList);
                 System.out.println("Lo! Thou art now bestowed with " + toDoList.size() + " noble quests upon thy parchment of duties.");
                 System.out.println("(You now have " + toDoList.size() + " tasks in the to do list)\n");
             }
