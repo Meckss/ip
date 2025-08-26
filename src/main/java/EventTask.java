@@ -1,11 +1,11 @@
 class EventTask extends Task{
-    String from;
-    String to;
+    MaybeDate from;
+    MaybeDate to;
 
     public EventTask(String description, String from, String to) {
         super(description, TaskType.E);
-        this.from = from;
-        this.to = to;
+        this.from = MaybeDate.parse(from);
+        this.to = MaybeDate.parse(to);
     }
 
     @Override

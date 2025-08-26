@@ -1,9 +1,9 @@
 class DeadlineTask extends Task {
-    String deadline;
+    MaybeDate deadline;
 
     public DeadlineTask(String description, String deadline) {
         super(description, TaskType.D);
-        this.deadline = deadline;
+        this.deadline = MaybeDate.parse(deadline);
     }
 
     @Override
