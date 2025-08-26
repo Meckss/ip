@@ -230,13 +230,12 @@ public class Hope {
                 }
                 if (input < 1) {
                     System.out.println("Doth this be a jest, good sir?\n"
-                            + "(Negative numbers are not accepted as input)\n");
+                            + "(0 and negative numbers are not accepted as input)\n");
                     return;
                 }
 
-
                 System.out.println("Heed this decree! This noble quest hath been cast aside.");
-                System.out.println(toDoList.get(input).toString());
+                System.out.println(toDoList.get(input - 1).toString());
                 toDoList.remove(input - 1);
                 taskStorage.update(toDoList);
                 System.out.println("Lo! Thou art now bestowed with " + toDoList.size() + " noble quests upon thy parchment of duties.");
