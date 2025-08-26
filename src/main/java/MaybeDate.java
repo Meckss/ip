@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.List;
@@ -12,7 +13,10 @@ public class MaybeDate {
 
     private static final List<DateTimeFormatter> supportedFormats = List.of(
             DateTimeFormatter.ofPattern("yyyy-MM-dd"),
-            DateTimeFormatter.ofPattern("MM/dd/yyyy")
+            DateTimeFormatter.ofPattern("MM/dd/yyyy"),
+            DateTimeFormatter.ofPattern("M/dd/yyyy"),
+            DateTimeFormatter.ofPattern("MM/d/yyyy"),
+            DateTimeFormatter.ofPattern("M/d/yyyy")
     );
 
 
@@ -27,13 +31,15 @@ public class MaybeDate {
 
     public static MaybeDate parse(String input) {
         LocalDate temp = null;
+        DateTimeFormatterBuilder dateTimeFormatterBuilder = new DateTimeFormatterBuilder();
         for(DateTimeFormatter format : supportedFormats) {
-            try {
-                temp = LocalDate.parse(input, format);
-                return new MaybeDate(temp, null);
-            } catch (DateTimeParseException e) {
+            dateTimeFormatterBuilder.appendOptional(format);
+        }
+        try {
+            temp = LocalDate.parse(input, dateTimeFormatterBuilder.toFormatter());
+            return new MaybeDate(temp, null);
+        } catch (DateTimeParseException e) {
 
-            }
         }
 
         return new MaybeDate(null, input);
