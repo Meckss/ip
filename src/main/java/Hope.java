@@ -238,7 +238,7 @@ public class Hope {
 
                 System.out.println("Heed this decree! This noble quest hath been cast aside.");
                 System.out.println(toDoList.get(input).toString());
-                toDoList.remove(input);
+                toDoList.remove(input - 1);
                 System.out.println("Lo! Thou art now bestowed with " + toDoList.size() + " noble quests upon thy parchment of duties.");
                 System.out.println("(You now have " + toDoList.size() + " tasks in the to do list)\n");
             }
