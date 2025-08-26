@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Set;
@@ -246,7 +247,22 @@ public class Hope {
 
 
     public static void main(String[] args) {
-        System.out.println("Greetings, fair wanderer! I am Hope, your humble companion\n" + "How might I assist thee on this grand quest?\n");
+        try {
+            File parentDir = data.getParentFile();
+            if(parentDir.exists() && parentDir.isDirectory()) {
+                if(!data.exists()) {
+                    data.createNewFile();
+                }
+            } else {
+                parentDir.mkdirs();
+                data.createNewFile();
+            }
+        } catch (IOException e) {
+            System.out.println("Error creating file or directoy: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+            System.out.println("Greetings, fair wanderer! I am Hope, your humble companion\n" + "How might I assist thee on this grand quest?\n");
         Scanner userInput = new Scanner(System.in);
         while(online) {
             String input = userInput.nextLine();
