@@ -2,7 +2,7 @@ class DeadlineTask extends Task {
     String deadline;
 
     public DeadlineTask(String description, String deadline) {
-        super(description + " (by: " + deadline + ")", TaskType.D);
+        super(description, TaskType.D);
         this.deadline = deadline;
     }
 
@@ -18,6 +18,13 @@ class DeadlineTask extends Task {
 
         StringBuilder sb = new StringBuilder();
         sb.append(type).append("|").append(status).append("|").append(description).append("|").append(deadline);
+        return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.getTaskType()).append(" [").append(this.getStatusIcon()).append("] ").append(this.description).append(" (by: ").append(deadline).append(")");
         return sb.toString();
     }
 
