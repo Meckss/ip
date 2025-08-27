@@ -1,10 +1,15 @@
+package Parser;
+
+import Commands.*;
+import Storage.TaskStorage;
+import Storage.ToDoList;
+
 import java.util.HashMap;
 import java.util.Set;
 
 public class Parser {
     private ToDoList toDoList;
     private TaskStorage taskStorage;
-    private Hope hope;
 
     private static final Set<String> COMMANDS = Set.of(
             "bye",
@@ -20,7 +25,7 @@ public class Parser {
     private static final HashMap<String, Command> EXECUTECOMMAND= new HashMap<>();
 
     private void initialize() {
-        EXECUTECOMMAND.put("bye", new EndCommand(hope));
+        EXECUTECOMMAND.put("bye", new EndCommand());
         EXECUTECOMMAND.put("list", new ListCommand(toDoList));
         EXECUTECOMMAND.put("mark", new MarkCommand(toDoList,taskStorage));
         EXECUTECOMMAND.put("unmark", new UnmarkCommand(toDoList, taskStorage));
@@ -30,21 +35,21 @@ public class Parser {
         EXECUTECOMMAND.put("delete", new DeleteCommand(toDoList, taskStorage));
     }
 
-    public Parser(TaskStorage taskStorage, ToDoList toDoList, Hope hope) {
+    public Parser(TaskStorage taskStorage, ToDoList toDoList) {
         this.taskStorage = taskStorage;
         this.toDoList = toDoList;
-        this.hope = hope;
         this.initialize();
     }
 
-    public void parse(String input) {
+    public Command parse(String input) {
         String[] instructions = input.split(" ", 2);
         String inputCommand = instructions[0];
         String argument = instructions.length == 2 ? instructions[1] : input;
         if(COMMANDS.contains(inputCommand)) {
             EXECUTECOMMAND.get(inputCommand).execute(argument.trim());
-            return;
+            return EXECUTECOMMAND.get(inputCommand);
         }
         System.out.println("Pardon me, noble companion, but what dost thou mean to convey?\n");
+        return EXECUTECOMMAND.get("list");
     }
 }

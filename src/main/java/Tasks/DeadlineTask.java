@@ -1,8 +1,12 @@
-class DeadlineTask extends Task {
+package Tasks;
+
+import Common.MaybeDate;
+
+public class DeadlineTask extends Task {
     MaybeDate deadline;
 
     public DeadlineTask(String description, String deadline) {
-        super(description, TaskType.D);
+        super(description, Task.TaskType.D);
         this.deadline = MaybeDate.parse(deadline);
     }
 

@@ -1,9 +1,13 @@
-class EventTask extends Task{
+package Tasks;
+
+import Common.MaybeDate;
+
+public class EventTask extends Task {
     MaybeDate from;
     MaybeDate to;
 
     public EventTask(String description, String from, String to) {
-        super(description, TaskType.E);
+        super(description, Task.TaskType.E);
         this.from = MaybeDate.parse(from);
         this.to = MaybeDate.parse(to);
     }

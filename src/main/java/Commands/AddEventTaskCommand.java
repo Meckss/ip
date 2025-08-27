@@ -1,4 +1,10 @@
-public class AddEventTaskCommand implements Command{
+package Commands;
+
+import Storage.TaskStorage;
+import Tasks.EventTask;
+import Storage.ToDoList;
+
+public class AddEventTaskCommand implements Command {
 
     private ToDoList toDoList;
     private TaskStorage taskStorage;

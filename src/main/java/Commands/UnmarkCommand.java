@@ -1,11 +1,19 @@
-public class MarkCommand implements Command{
+package Commands;
+
+import CustomExceptions.RedundantStateChangeException;
+import Storage.TaskStorage;
+import Storage.ToDoList;
+
+public class UnmarkCommand implements Command {
     private ToDoList toDoList;
     private TaskStorage taskStorage;
 
-    public MarkCommand(ToDoList toDoList, TaskStorage taskStorage) {
+    public UnmarkCommand(ToDoList toDoList, TaskStorage taskStorage) {
         this.toDoList = toDoList;
         this.taskStorage = taskStorage;
     }
+
+
 
     @Override
     public void execute(Object o) {
@@ -29,14 +37,14 @@ public class MarkCommand implements Command{
                 return;
             }
             try {
-                toDoList.get(input - 1).markAsDone();
+                toDoList.get(input - 1).unmark();
             } catch (RedundantStateChangeException e) {
-                System.out.println("Verily, the noble quest was marked from the very outset; hath thy memory slipped away like a fleeting shadow?");
-                System.out.println("(The task was already marked to begin with)\n");
+                System.out.println("Verily, the noble quest was unmarked from the very outset; hath thy memory slipped away like a fleeting shadow?");
+                System.out.println("(The task was already unmarked to begin with)\n");
                 return;
             }
             taskStorage.update(toDoList);
-            System.out.println("Hark, I declare the #" + input + " noble endeavor accomplished!");
+            System.out.println("Lo! The noble quest, task #" + input + " , doth still beckon thy valorous attention!");
             System.out.println(toDoList.get(input - 1) + "\n");
         }
     }

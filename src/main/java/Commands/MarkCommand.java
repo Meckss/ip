@@ -1,8 +1,14 @@
-public class DeleteCommand implements Command{
+package Commands;
+
+import CustomExceptions.RedundantStateChangeException;
+import Storage.TaskStorage;
+import Storage.ToDoList;
+
+public class MarkCommand implements Command {
     private ToDoList toDoList;
     private TaskStorage taskStorage;
 
-    public DeleteCommand(ToDoList toDoList, TaskStorage taskStorage) {
+    public MarkCommand(ToDoList toDoList, TaskStorage taskStorage) {
         this.toDoList = toDoList;
         this.taskStorage = taskStorage;
     }
@@ -18,23 +24,26 @@ public class DeleteCommand implements Command{
                 return;
             }
             int input = Integer.parseInt((String) o);
-            if (input > toDoList.size()) {
+            if(input > toDoList.size()) {
                 System.out.println("Thy request doth stray beyond the hallowed limits.\n"
                         + "(The number you have input is greater than the number of tasks you currently have)\n");
                 return;
             }
-            if (input < 1) {
+            if(input < 1) {
                 System.out.println("Doth this be a jest, good sir?\n"
-                        + "(0 and negative numbers are not accepted as input)\n");
+                        + "(Negative numbers are not accepted as input)\n");
                 return;
             }
-
-            System.out.println("Heed this decree! This noble quest hath been cast aside.");
-            System.out.println(toDoList.get(input - 1).toString());
-            toDoList.remove(input - 1);
+            try {
+                toDoList.get(input - 1).markAsDone();
+            } catch (RedundantStateChangeException e) {
+                System.out.println("Verily, the noble quest was marked from the very outset; hath thy memory slipped away like a fleeting shadow?");
+                System.out.println("(The task was already marked to begin with)\n");
+                return;
+            }
             taskStorage.update(toDoList);
-            System.out.println("Lo! Thou art now bestowed with " + toDoList.size() + " noble quests upon thy parchment of duties.");
-            System.out.println("(You now have " + toDoList.size() + " tasks in the to do list)\n");
+            System.out.println("Hark, I declare the #" + input + " noble endeavor accomplished!");
+            System.out.println(toDoList.get(input - 1) + "\n");
         }
     }
 }

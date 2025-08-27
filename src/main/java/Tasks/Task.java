@@ -1,3 +1,7 @@
+package Tasks;
+
+import CustomExceptions.RedundantStateChangeException;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -22,14 +26,14 @@ public abstract class Task {
         return "[" + type + "]";
     }
 
-    protected void markAsDone() throws RedundantStateChangeException {
+    public void markAsDone() throws RedundantStateChangeException {
         if(this.isDone) {
             throw new RedundantStateChangeException("");
         }
         this.isDone = true;
     }
 
-    protected void unmark() throws RedundantStateChangeException {
+    public void unmark() throws RedundantStateChangeException {
         if(!this.isDone) {
             throw new RedundantStateChangeException("");
         }

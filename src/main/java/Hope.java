@@ -1,13 +1,11 @@
+import Commands.EndCommand;
+import Parser.Parser;
+import Storage.TaskStorage;
+import Storage.ToDoList;
+import Ui.Ui;
+
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.List;
-import java.util.ArrayList;
 import java.io.File;
-import java.util.Scanner;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 
 public class Hope {
     private final File data;
@@ -25,7 +23,7 @@ public class Hope {
         this.taskStorage = new TaskStorage(data);
         this.online = true;
         this.toDoList = new ToDoList(taskStorage.toList());
-        this.parser = new Parser(taskStorage, toDoList, this);
+        this.parser = new Parser(taskStorage, toDoList);
 
         try {
             File parentDir = data.getParentFile();
@@ -46,13 +44,11 @@ public class Hope {
         ui.showMessageWelcome();
         while(online) {
             String userInput = ui.getUserInput();
-            parser.parse(userInput);
+            if(parser.parse(userInput) instanceof EndCommand) {
+                online = false;
+            };
         }
         ui.showShutdownMessage();
-    }
-
-    public void shutdown() {
-        this.online = false;
     }
 
     public static void main(String[] args) {

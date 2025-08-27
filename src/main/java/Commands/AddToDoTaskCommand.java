@@ -1,29 +1,28 @@
-public class AddDeadlineTaskCommand implements Command{
+package Commands;
 
-    private ToDoList toDoList;
-    private TaskStorage taskStorage;
+import Storage.TaskStorage;
+import Storage.ToDoList;
+import Tasks.ToDoTask;
 
-    public AddDeadlineTaskCommand(ToDoList toDoList, TaskStorage taskStorage) {
+public class AddToDoTaskCommand implements Command {
+
+    private final ToDoList toDoList;
+    private final TaskStorage taskStorage;
+
+    public AddToDoTaskCommand(ToDoList toDoList, TaskStorage taskStorage) {
         this.toDoList = toDoList;
         this.taskStorage = taskStorage;
     }
 
-
     @Override
     public void execute(Object o) {
         String input = (String) o;
-        if (input.equals("deadline")) {
+        if(input.isEmpty() || input.equals("todo")) {
             System.out.println("Thou hast overlooked the noble task of bestowing a worthy description upon this endeavor!");
-            System.out.println("(Looks like you forgot to input a description and a deadline! Try again)\n");
+            System.out.println("(Empty input detected, please try again)\n");
             return;
         }
-        String[] info = input.split("/by");
-        if (info.length == 1) {
-            System.out.println("Verily, thou hast erred in thy response; endeavor once more, brave soul!");
-            System.out.println("(Incorrect input, please try again)\n");
-            return;
-        }
-        DeadlineTask temp = new DeadlineTask(info[0].trim(), info[1].trim());
+        ToDoTask temp = new ToDoTask(input);
         toDoList.add(temp);
         taskStorage.append(temp);
         System.out.println("Behold, this quest hath been entrusted!");

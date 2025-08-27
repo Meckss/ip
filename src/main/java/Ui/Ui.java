@@ -1,3 +1,5 @@
+package Ui;
+
 import java.util.HashMap;
 import java.util.Scanner;
 

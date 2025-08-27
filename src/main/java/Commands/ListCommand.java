@@ -1,4 +1,8 @@
-public class ListCommand implements Command{
+package Commands;
+
+import Storage.ToDoList;
+
+public class ListCommand implements Command {
     private static ToDoList toDoList;
 
     public ListCommand(ToDoList toDoList) {

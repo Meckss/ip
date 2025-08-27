@@ -1,5 +1,8 @@
+package Storage;
+
+import Tasks.*;
+
 import java.io.IOException;
-import java.util.List;
 import java.util.ArrayList;
 import java.io.File;
 import java.util.Scanner;
@@ -24,7 +27,7 @@ public class TaskStorage {
 
 
 
-    protected void update(ToDoList list) {
+    public void update(ToDoList list) {
         try (FileWriter fileWriter = new FileWriter(file);){
             StringBuilder sb = new StringBuilder();
             for(int i = 0; i < list.size(); i++) {
@@ -41,7 +44,7 @@ public class TaskStorage {
 
     }
 
-    protected ArrayList<Task> toList() {
+    public ArrayList<Task> toList() {
         ArrayList<Task> ans = new ArrayList<Task>();
         try(Scanner s = new Scanner(file);) {
             int length = 0;
