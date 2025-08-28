@@ -4,14 +4,30 @@ import java.util.ArrayList;
 
 import Storage.ToDoList;
 
-
+/**
+ * Represents a command to search for tasks in a ToDoList that contain a specified keyword
+ * in their description. This command filters tasks from the provided ToDoList and
+ * displays matching tasks or a message if no matches are found.
+ */
 public class FindCommand implements Command{
     private ToDoList toDoList;
 
+    /**
+     * Constructs a FindCommand with the specified ToDoList.
+     *
+     * @param toDoList the ToDoList to search through for matching tasks
+     */
     public FindCommand(ToDoList toDoList) {
         this.toDoList = toDoList;
     }
 
+    /**
+     * Executes the find command by searching for tasks in the ToDoList whose descriptions
+     * contain the specified input string. Prints matching tasks or a message if no tasks
+     * are found.
+     *
+     * @param o the input object, expected to be a String representing the keyword to search for
+     */
     @Override
     public void execute(Object o) {
         ToDoList tempToDoList = new ToDoList(new ArrayList<>());
