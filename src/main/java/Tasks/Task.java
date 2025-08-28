@@ -65,6 +65,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
      * Marks the task as not done.
      *

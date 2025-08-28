@@ -32,7 +32,8 @@ public class Parser {
             "todo",
             "deadline",
             "event",
-            "delete"
+            "delete",
+            "find"
     );
 
     /** A mapping of command names to their corresponding {@link Command} implementations. */
@@ -51,6 +52,7 @@ public class Parser {
         GET_COMMAND.put("deadline", new AddDeadlineTaskCommand(toDoList, taskStorage));
         GET_COMMAND.put("event", new AddEventTaskCommand(toDoList, taskStorage));
         GET_COMMAND.put("delete", new DeleteCommand(toDoList, taskStorage));
+        GET_COMMAND.put("find", new FindCommand(toDoList));
     }
 
     /**
