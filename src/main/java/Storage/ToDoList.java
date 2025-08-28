@@ -17,7 +17,7 @@ public class ToDoList {
     }
 
     public Task get(int i) {
-        return list.get(i);
+        return list.get(i - 1);
     }
 
     public int size() {
