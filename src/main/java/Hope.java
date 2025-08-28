@@ -10,7 +10,7 @@ import java.io.File;
 public class Hope {
     private final File data;
     private final TaskStorage taskStorage;
-    private boolean online;
+    private boolean isOnline;
     private ToDoList toDoList;
     private Ui ui;
     private Parser parser;
@@ -21,7 +21,7 @@ public class Hope {
         ui = new Ui();
         this.data = new File("./data/Hope.txt");
         this.taskStorage = new TaskStorage(data);
-        this.online = true;
+        this.isOnline = true;
         this.toDoList = new ToDoList(taskStorage.toList());
         this.parser = new Parser(taskStorage, toDoList);
 
@@ -42,10 +42,10 @@ public class Hope {
 
     public void run() {
         ui.showMessageWelcome();
-        while(online) {
+        while(isOnline) {
             String userInput = ui.getUserInput();
             if(parser.parse(userInput) instanceof EndCommand) {
-                online = false;
+                isOnline = false;
             };
         }
         ui.showShutdownMessage();

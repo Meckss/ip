@@ -39,12 +39,14 @@ public class UnmarkCommand implements Command {
             try {
                 toDoList.get(input - 1).unmark();
             } catch (RedundantStateChangeException e) {
-                System.out.println("Verily, the noble quest was unmarked from the very outset; hath thy memory slipped away like a fleeting shadow?");
+                System.out.println("Verily, the noble quest was unmarked from the very outset; hath thy memory "
+                        + "slipped away like a fleeting shadow?");
                 System.out.println("(The task was already unmarked to begin with)\n");
                 return;
             }
             taskStorage.update(toDoList);
-            System.out.println("Lo! The noble quest, task #" + input + " , doth still beckon thy valorous attention!");
+            System.out.println("Lo! The noble quest, task #" + input
+                    + " , doth still beckon thy valorous attention!");
             System.out.println(toDoList.get(input - 1) + "\n");
         }
     }

@@ -1,8 +1,8 @@
 package Commands;
 
 import Storage.TaskStorage;
-import Tasks.DeadlineTask;
 import Storage.ToDoList;
+import Tasks.DeadlineTask;
 
 public class AddDeadlineTaskCommand implements Command {
 
@@ -19,7 +19,8 @@ public class AddDeadlineTaskCommand implements Command {
     public void execute(Object o) {
         String input = (String) o;
         if (input.equals("deadline")) {
-            System.out.println("Thou hast overlooked the noble task of bestowing a worthy description upon this endeavor!");
+            System.out.println("Thou hast overlooked the noble task of bestowing a worthy description upon this "
+                    + "endeavor!");
             System.out.println("(Looks like you forgot to input a description and a deadline! Try again)\n");
             return;
         }
@@ -34,7 +35,8 @@ public class AddDeadlineTaskCommand implements Command {
         taskStorage.append(temp);
         System.out.println("Behold, this quest hath been entrusted!");
         System.out.println(temp.toString() + "\n");
-        System.out.println("Lo! Thou art now bestowed with " + toDoList.size() + " noble quests upon thy parchment of duties.");
+        System.out.println("Lo! Thou art now bestowed with " + toDoList.size()
+                + " noble quests upon thy parchment of duties.");
         System.out.println("(You now have " + toDoList.size() + " tasks in the list)\n");
     }
 }

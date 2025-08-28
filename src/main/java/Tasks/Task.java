@@ -57,7 +57,9 @@ public abstract class Task {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.getTaskType()).append(" [").append(this.getStatusIcon()).append("] ").append(this.description);
+        sb.append(this.getTaskType()).append(" [").
+                append(this.getStatusIcon()).append("] ")
+                .append(this.description);
         return sb.toString();
     }
 }

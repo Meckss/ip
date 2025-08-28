@@ -37,7 +37,8 @@ public class MarkCommand implements Command {
             try {
                 toDoList.get(input - 1).markAsDone();
             } catch (RedundantStateChangeException e) {
-                System.out.println("Verily, the noble quest was marked from the very outset; hath thy memory slipped away like a fleeting shadow?");
+                System.out.println("Verily, the noble quest was marked from the very outset; hath thy memory slipped"
+                        + " away like a fleeting shadow?");
                 System.out.println("(The task was already marked to begin with)\n");
                 return;
             }

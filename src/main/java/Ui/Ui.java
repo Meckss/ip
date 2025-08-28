@@ -6,13 +6,14 @@ import java.util.Scanner;
 public class Ui {
     private final Scanner sc;
 
-    private static HashMap<String, String> MESSAGELIST = new HashMap<>();
+    private static HashMap<String, String> MESSAGE_LIST = new HashMap<>();
 
     static {
-        MESSAGELIST.put("MESSAGE_WELCOME", "Greetings, fair wanderer!\nI am Hope, your humble companion. How might I assist thee on this grand quest?");
-        MESSAGELIST.put("MESSAGE_INVALID_COMMAND", "Pardon me, noble companion, but what dost thou mean to convey?");
-        MESSAGELIST.put("MESSAGE_INIT_FAILED", "Error creating file or directory, exitting...");
-        MESSAGELIST.put("MESSAGE_SHUTDOWN", "Fare thee well, noble friend!");
+        MESSAGE_LIST.put("MESSAGE_WELCOME", "Greetings, fair wanderer!\nI am Hope, your humble companion. How might I" +
+                " assist thee on this grand quest?");
+        MESSAGE_LIST.put("MESSAGE_INVALID_COMMAND", "Pardon me, noble companion, but what dost thou mean to convey?");
+        MESSAGE_LIST.put("MESSAGE_INIT_FAILED", "Error creating file or directory, exitting...");
+        MESSAGE_LIST.put("MESSAGE_SHUTDOWN", "Fare thee well, noble friend!");
 
     }
 
@@ -29,15 +30,15 @@ public class Ui {
     }
 
     public void showMessageInitFailed() {
-        printToUser(MESSAGELIST.get("MESSAGE_INIT_FAILED"));
+        printToUser(MESSAGE_LIST.get("MESSAGE_INIT_FAILED"));
     }
 
     public void showMessageWelcome() {
-        printToUser(MESSAGELIST.get("MESSAGE_WELCOME"));
+        printToUser(MESSAGE_LIST.get("MESSAGE_WELCOME"));
     }
 
     public void showShutdownMessage() {
-        printToUser(MESSAGELIST.get("MESSAGE_SHUTDOWN"));
+        printToUser(MESSAGE_LIST.get("MESSAGE_SHUTDOWN"));
     }
 
 

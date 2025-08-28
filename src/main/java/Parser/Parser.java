@@ -1,11 +1,12 @@
 package Parser;
 
+import java.util.HashMap;
+import java.util.Set;
+
 import Commands.*;
 import Storage.TaskStorage;
 import Storage.ToDoList;
 
-import java.util.HashMap;
-import java.util.Set;
 
 public class Parser {
     private ToDoList toDoList;
@@ -22,17 +23,17 @@ public class Parser {
             "delete"
     );
 
-    private static final HashMap<String, Command> EXECUTECOMMAND= new HashMap<>();
+    private static final HashMap<String, Command> GET_COMMAND= new HashMap<>();
 
     private void initialize() {
-        EXECUTECOMMAND.put("bye", new EndCommand());
-        EXECUTECOMMAND.put("list", new ListCommand(toDoList));
-        EXECUTECOMMAND.put("mark", new MarkCommand(toDoList,taskStorage));
-        EXECUTECOMMAND.put("unmark", new UnmarkCommand(toDoList, taskStorage));
-        EXECUTECOMMAND.put("todo", new AddToDoTaskCommand(toDoList, taskStorage));
-        EXECUTECOMMAND.put("deadline", new AddDeadlineTaskCommand(toDoList, taskStorage));
-        EXECUTECOMMAND.put("event", new AddEventTaskCommand(toDoList, taskStorage));
-        EXECUTECOMMAND.put("delete", new DeleteCommand(toDoList, taskStorage));
+        GET_COMMAND.put("bye", new EndCommand());
+        GET_COMMAND.put("list", new ListCommand(toDoList));
+        GET_COMMAND.put("mark", new MarkCommand(toDoList,taskStorage));
+        GET_COMMAND.put("unmark", new UnmarkCommand(toDoList, taskStorage));
+        GET_COMMAND.put("todo", new AddToDoTaskCommand(toDoList, taskStorage));
+        GET_COMMAND.put("deadline", new AddDeadlineTaskCommand(toDoList, taskStorage));
+        GET_COMMAND.put("event", new AddEventTaskCommand(toDoList, taskStorage));
+        GET_COMMAND.put("delete", new DeleteCommand(toDoList, taskStorage));
     }
 
     public Parser(TaskStorage taskStorage, ToDoList toDoList) {
@@ -46,10 +47,10 @@ public class Parser {
         String inputCommand = instructions[0];
         String argument = instructions.length == 2 ? instructions[1] : input;
         if(COMMANDS.contains(inputCommand)) {
-            EXECUTECOMMAND.get(inputCommand).execute(argument.trim());
-            return EXECUTECOMMAND.get(inputCommand);
+            GET_COMMAND.get(inputCommand).execute(argument.trim());
+            return GET_COMMAND.get(inputCommand);
         }
         System.out.println("Pardon me, noble companion, but what dost thou mean to convey?\n");
-        return EXECUTECOMMAND.get("list");
+        return GET_COMMAND.get("list");
     }
 }
