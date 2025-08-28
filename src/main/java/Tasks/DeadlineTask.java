@@ -37,14 +37,17 @@ public class DeadlineTask extends Task {
         }
 
         StringBuilder sb = new StringBuilder();
-        sb.append(type).append("|").append(status).append("|").append(description).append("|").append(deadline);
+        sb.append(type).append("|").append(status).append("|")
+                .append(description).append("|").append(deadline);
         return sb.toString();
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.getTaskType()).append(" [").append(this.getStatusIcon()).append("] ").append(this.description).append(" (by: ").append(deadline).append(")");
+        sb.append(this.getTaskType()).append(" [").append(this.getStatusIcon())
+                .append("] ").append(this.description).append(" (by: ")
+                .append(deadline).append(")");
         return sb.toString();
     }
 

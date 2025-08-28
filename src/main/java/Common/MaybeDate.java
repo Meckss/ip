@@ -24,7 +24,7 @@ public class MaybeDate {
     private Temporal date;
 
     /** A list of supported date formats for parsing input strings. */
-    private static final List<DateTimeFormatter> supportedFormats = List.of(
+    private static final List<DateTimeFormatter> SUPPORTED_FORMATS = List.of(
             DateTimeFormatter.ofPattern("yyyy-MM-dd"),
             DateTimeFormatter.ofPattern("MM/dd/yyyy"),
             DateTimeFormatter.ofPattern("M/dd/yyyy"),
@@ -33,10 +33,10 @@ public class MaybeDate {
     );
 
     /** The formatter for outputting dates in the format "MMM dd yyyy". */
-    private static final DateTimeFormatter outputDateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private static final DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     /** The formatter for outputting date-times in the format "MMM dd yyyy HHmm". */
-    private static final DateTimeFormatter outputDateTimeFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
+    private static final DateTimeFormatter OUTPUT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
 
     /**
      * Constructs a {@code MaybeDate} instance with the specified date and description.
@@ -62,10 +62,13 @@ public class MaybeDate {
     public static MaybeDate parse(String input) {
         LocalDateTime temp = null;
         DateTimeFormatterBuilder dateTimeFormatterBuilder = new DateTimeFormatterBuilder();
-        for(DateTimeFormatter format : supportedFormats) {
+        for(DateTimeFormatter format : SUPPORTED_FORMATS) {
             dateTimeFormatterBuilder.appendOptional(format);
         }
-        dateTimeFormatterBuilder.optionalStart().appendOptional(DateTimeFormatter.ofPattern(" HH:mm")).appendOptional(DateTimeFormatter.ofPattern(" HHmm")).optionalEnd();
+        dateTimeFormatterBuilder.optionalStart()
+                .appendOptional(DateTimeFormatter.ofPattern(" HH:mm"))
+                .appendOptional(DateTimeFormatter.ofPattern(" HHmm"))
+                .optionalEnd();
         try {
             temp = LocalDateTime.parse(input, dateTimeFormatterBuilder.toFormatter());
             return new MaybeDate(temp, null);
@@ -78,8 +81,8 @@ public class MaybeDate {
 
     /**
      * Returns a string representation of the {@code MaybeDate}.
-     * If a date is present, it is formatted using {@link #outputDateFormat} for {@link LocalDate}
-     * or {@link #outputDateTimeFormat} for {@link LocalDateTime}. If no date is present, the
+     * If a date is present, it is formatted using {@link #OUTPUT_DATE_FORMAT} for {@link LocalDate}
+     * or {@link #OUTPUT_DATE_TIME_FORMAT} for {@link LocalDateTime}. If no date is present, the
      * description string is returned.
      *
      * @return a formatted date string or the description
@@ -90,10 +93,10 @@ public class MaybeDate {
             return description;
         } else {
             if(date instanceof LocalDate){
-                return outputDateFormat.format(date);
+                return OUTPUT_DATE_FORMAT.format(date);
             }
             if( date instanceof LocalDateTime) {
-                return outputDateTimeFormat.format(date);
+                return OUTPUT_DATE_TIME_FORMAT.format(date);
             }
         }
         return description;

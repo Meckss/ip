@@ -31,7 +31,8 @@ public class ToDoTask extends Task {
         }
 
         StringBuilder sb = new StringBuilder();
-        sb.append(type).append("|").append(status).append("|").append(description);
+        sb.append(type).append("|").append(status)
+                .append("|").append(description);
         return sb.toString();
     }
 }

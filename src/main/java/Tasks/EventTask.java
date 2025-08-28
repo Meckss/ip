@@ -41,14 +41,19 @@ public class EventTask extends Task {
         }
 
         StringBuilder sb = new StringBuilder();
-        sb.append(type).append("|").append(status).append("|").append(description).append("|").append(from).append("|").append(to);
+        sb.append(type).append("|").append(status)
+                .append("|").append(description)
+                .append("|").append(from)
+                .append("|").append(to);
         return sb.toString();
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.getTaskType()).append(" [").append(this.getStatusIcon()).append("] ").append(this.description).append(" (from: ").append(from).append(" to: ").append(to).append(")");
+        sb.append(this.getTaskType()).append(" [").append(this.getStatusIcon())
+                .append("] ").append(this.description).append(" (from: ")
+                .append(from).append(" to: ").append(to).append(")");
         return sb.toString();
     }
 

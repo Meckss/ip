@@ -67,7 +67,8 @@ public class DeleteCommand implements Command {
             System.out.println(toDoList.get(input - 1).toString());
             toDoList.remove(input - 1);
             taskStorage.update(toDoList);
-            System.out.println("Lo! Thou art now bestowed with " + toDoList.size() + " noble quests upon thy parchment of duties.");
+            System.out.println("Lo! Thou art now bestowed with " + toDoList.size()
+                    + " noble quests upon thy parchment of duties.");
             System.out.println("(You now have " + toDoList.size() + " tasks in the to do list)\n");
         }
     }

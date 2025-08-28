@@ -1,8 +1,8 @@
 package Commands;
 
 import Storage.TaskStorage;
-import Tasks.EventTask;
 import Storage.ToDoList;
+import Tasks.EventTask;
 
 /**
  * A command that adds an event task to a to-do list and persists it to storage.
@@ -46,7 +46,8 @@ public class AddEventTaskCommand implements Command {
     public void execute(Object o) {
         String input = (String) o;
         if(input.equals("event")) {
-            System.out.println("Thou hast overlooked the noble task of bestowing a worthy description upon this endeavor!");
+            System.out.println("Thou hast overlooked the noble task of bestowing a worthy description upon this "
+                    + "endeavor!");
             System.out.println("(Looks like you forgot to input description, from and to! Try again)\n");
             return;
         }
@@ -67,7 +68,8 @@ public class AddEventTaskCommand implements Command {
         taskStorage.append(temp);
         System.out.println("Behold, this quest hath been entrusted!:");
         System.out.println(temp.toString() + "\n");
-        System.out.println("Lo! Thou art now bestowed with " + toDoList.size() + " noble quests upon thy parchment of duties.");
+        System.out.println("Lo! Thou art now bestowed with " + toDoList.size()
+                + " noble quests upon thy parchment of duties.");
         System.out.println("(You now have " + toDoList.size() + " tasks in the to do list)\n");
     }
 }

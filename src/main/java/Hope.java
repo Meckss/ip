@@ -22,7 +22,7 @@ public class Hope {
     private final TaskStorage taskStorage;
 
     /** Indicates whether the chatbot is running. */
-    private boolean online;
+    private boolean isOnline;
 
     /** The to-do list containing the user's tasks. */
     private ToDoList toDoList;
@@ -43,7 +43,7 @@ public class Hope {
         ui = new Ui();
         this.data = new File("./data/Hope.txt");
         this.taskStorage = new TaskStorage(data);
-        this.online = true;
+        this.isOnline = true;
         this.toDoList = new ToDoList(taskStorage.toList());
         this.parser = new Parser(taskStorage, toDoList);
 
@@ -70,10 +70,10 @@ public class Hope {
      */
     public void run() {
         ui.showMessageWelcome();
-        while(online) {
+        while(isOnline) {
             String userInput = ui.getUserInput();
             if(parser.parse(userInput) instanceof EndCommand) {
-                online = false;
+                isOnline = false;
             };
         }
         ui.showShutdownMessage();

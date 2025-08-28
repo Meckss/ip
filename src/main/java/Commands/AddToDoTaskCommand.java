@@ -43,7 +43,8 @@ public class AddToDoTaskCommand implements Command {
     public void execute(Object o) {
         String input = (String) o;
         if(input.isEmpty() || input.equals("todo")) {
-            System.out.println("Thou hast overlooked the noble task of bestowing a worthy description upon this endeavor!");
+            System.out.println("Thou hast overlooked the noble task of bestowing a worthy description upon this "
+                    + "endeavor!");
             System.out.println("(Empty input detected, please try again)\n");
             return;
         }
@@ -52,7 +53,8 @@ public class AddToDoTaskCommand implements Command {
         taskStorage.append(temp);
         System.out.println("Behold, this quest hath been entrusted!");
         System.out.println(temp.toString() + "\n");
-        System.out.println("Lo! Thou art now bestowed with " + toDoList.size() + " noble quests upon thy parchment of duties.");
+        System.out.println("Lo! Thou art now bestowed with " + toDoList.size()
+                + " noble quests upon thy parchment of duties.");
         System.out.println("(You now have " + toDoList.size() + " tasks in the list)\n");
     }
 }
