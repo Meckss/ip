@@ -19,7 +19,8 @@ public class Parser {
             "todo",
             "deadline",
             "event",
-            "delete"
+            "delete",
+            "find"
     );
 
     private static final HashMap<String, Command> EXECUTECOMMAND= new HashMap<>();
@@ -33,6 +34,7 @@ public class Parser {
         EXECUTECOMMAND.put("deadline", new AddDeadlineTaskCommand(toDoList, taskStorage));
         EXECUTECOMMAND.put("event", new AddEventTaskCommand(toDoList, taskStorage));
         EXECUTECOMMAND.put("delete", new DeleteCommand(toDoList, taskStorage));
+        EXECUTECOMMAND.put("find", new FindCommand(toDoList));
     }
 
     public Parser(TaskStorage taskStorage, ToDoList toDoList) {

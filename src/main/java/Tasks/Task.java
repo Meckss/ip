@@ -26,6 +26,10 @@ public abstract class Task {
         return "[" + type + "]";
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public void markAsDone() throws RedundantStateChangeException {
         if(this.isDone) {
             throw new RedundantStateChangeException("");
