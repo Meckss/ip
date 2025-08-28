@@ -9,14 +9,35 @@ import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 
+/**
+ * A utility class for managing the persistence of tasks in a file.
+ * The {@code TaskStorage} class handles reading tasks from a file and writing tasks to it,
+ * supporting the storage of {@link ToDoTask}, {@link DeadlineTask}, and {@link EventTask} objects.
+ * Tasks are stored in a specific format and can be appended, updated, or loaded into a list.
+ */
 public class TaskStorage {
+
+    /** The file used for storing tasks. */
     File file;
 
-
+    /**
+     * Constructs a {@code TaskStorage} instance with the specified file.
+     *
+     * @param file the {@link File} where tasks are stored
+     */
     public TaskStorage(File file) {
         this.file = file;
     }
 
+    /**
+     * Appends a task to the storage file.
+     * The task is formatted using its {@link Task#format()} method and written to the file
+     * with a newline character. If an error occurs during writing, a {@link RuntimeException}
+     * is thrown.
+     *
+     * @param t the {@link Task} to append to the file
+     * @throws RuntimeException if an error occurs during file writing
+     */
     public void append(Task t) {
         try(FileWriter fileWriter = new FileWriter(file, true);){
             fileWriter.append(t.format()).append("\n");
@@ -25,8 +46,14 @@ public class TaskStorage {
         }
     }
 
-
-
+    /**
+     * Updates the storage file with the contents of the provided to-do list.
+     * Writes the formatted representation of each task in the {@link ToDoList} to the file,
+     * overwriting its previous contents. Tasks are separated by newlines, except for the last task.
+     * If an {@link IOException} occurs, the method silently returns without updating the file.
+     *
+     * @param list the {@link ToDoList} containing tasks to write to the file
+     */
     public void update(ToDoList list) {
         try (FileWriter fileWriter = new FileWriter(file);){
             StringBuilder sb = new StringBuilder();
@@ -44,6 +71,15 @@ public class TaskStorage {
 
     }
 
+    /**
+     * Loads tasks from the storage file into a list.
+     * Reads the file line by line, parsing each line into a {@link Task} object based on its type
+     * ("T" for {@link ToDoTask}, "D" for {@link DeadlineTask}, "E" for {@link EventTask}).
+     * Tasks are marked as done if indicated in the file. If the file is not found, an empty
+     * list is returned.
+     *
+     * @return an {@link ArrayList} of {@link Task} objects loaded from the file
+     */
     public ArrayList<Task> toList() {
         ArrayList<Task> ans = new ArrayList<Task>();
         try(Scanner s = new Scanner(file);) {

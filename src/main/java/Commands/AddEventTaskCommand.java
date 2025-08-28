@@ -4,18 +4,44 @@ import Storage.TaskStorage;
 import Tasks.EventTask;
 import Storage.ToDoList;
 
+/**
+ * A command that adds an event task to a to-do list and persists it to storage.
+ * This class implements the {@link Command} interface and processes user input to create
+ * an {@link EventTask} with a description, start time, and end time. It validates the input,
+ * adds the task to the provided {@link ToDoList}, and appends it to the {@link TaskStorage}.
+ * If the input is invalid, appropriate error messages are displayed.
+ */
 public class AddEventTaskCommand implements Command {
 
+    /** The to-do list to which the event task will be added. */
     private ToDoList toDoList;
+
+    /** The storage system for persisting the event task. */
     private TaskStorage taskStorage;
 
+    /**
+     * Constructs an {@code AddEventTaskCommand} with the specified to-do list and task storage.
+     *
+     * @param toDoList   the {@link ToDoList} to which the event task will be added
+     * @param taskStorage the {@link TaskStorage} where the event task will be persisted
+     */
     public AddEventTaskCommand(ToDoList toDoList, TaskStorage taskStorage) {
         this.toDoList = toDoList;
         this.taskStorage = taskStorage;
     }
 
-
-
+    /**
+     * Executes the command to add an event task based on the provided input.
+     * The input string is expected to contain a task description, start time, and end time,
+     * separated by "/from" and "/to" (e.g., "description /from start /to end").
+     * If the input is invalid (e.g., missing description, start, or end time), an error message
+     * is printed, and no task is added. Otherwise, an {@link EventTask} is created, added to
+     * the to-do list, persisted to storage, and a confirmation message is displayed along with
+     * the updated task count.
+     *
+     * @param o the input object, expected to be a {@code String} containing the task description,
+     *          start time, and end time in the format "description /from start /to end"
+     */
     @Override
     public void execute(Object o) {
         String input = (String) o;

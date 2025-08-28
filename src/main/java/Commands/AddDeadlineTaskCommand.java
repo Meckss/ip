@@ -4,17 +4,38 @@ import Storage.TaskStorage;
 import Tasks.DeadlineTask;
 import Storage.ToDoList;
 
+/**
+ *  Adds a new {@link DeadlineTask} to storage.
+ *  This class implements the {@link Command} interface and processes user input to create a {@link DeadlineTask}
+ *  with a description and a deadline. It validates the input and adds the task to the provided {@link ToDoList} and
+ *  updates the {@link TaskStorage}. Invalid inputs are handled within the class.
+ */
 public class AddDeadlineTaskCommand implements Command {
 
     private ToDoList toDoList;
     private TaskStorage taskStorage;
 
+    /**
+     * Creates a {@link AddDeadlineTaskCommand} with the specified to-do list and task storage
+     *
+     * @param toDoList the {@link ToDoList} that {@link DeadlineTask} will be added to
+     * @param taskStorage the {@link TaskStorage} that will be updated
+     */
     public AddDeadlineTaskCommand(ToDoList toDoList, TaskStorage taskStorage) {
         this.toDoList = toDoList;
         this.taskStorage = taskStorage;
     }
 
-
+    /**
+     * Executes the command to add a deadline task based on the provided input.
+     * The input string is expected to contain a task description and a deadline, separated by "/by".
+     * If the input is invalid (e.g., missing description or deadline), an error message is printed,
+     * and no task is added. Otherwise, a {@link DeadlineTask} is created, added to the to-do list,
+     * storage updated, and a confirmation message printed along with the updated task count.
+     *
+     * @param o the input expected to be a {@code String} containing the task description
+     *          and deadline in the format "description /by deadline"
+     */
     @Override
     public void execute(Object o) {
         String input = (String) o;
