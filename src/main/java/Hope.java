@@ -1,11 +1,11 @@
-import Commands.EndCommand;
-import Parser.Parser;
-import Storage.TaskStorage;
-import Storage.ToDoList;
-import Ui.Ui;
-
-import java.io.IOException;
 import java.io.File;
+import java.io.IOException;
+
+import commands.EndCommand;
+import parser.Parser;
+import storage.TaskStorage;
+import storage.ToDoList;
+import ui.Ui;
 
 /**
  * A chatbot application named Hope that manages a to-do list.
@@ -49,8 +49,8 @@ public class Hope {
 
         try {
             File parentDir = data.getParentFile();
-            if(parentDir.exists() && parentDir.isDirectory()) {
-                if(!data.exists()) {
+            if (parentDir.exists() && parentDir.isDirectory()) {
+                if (!data.exists()) {
                     data.createNewFile();
                 }
             } else {
@@ -70,11 +70,11 @@ public class Hope {
      */
     public void run() {
         ui.showMessageWelcome();
-        while(isOnline) {
+        while (isOnline) {
             String userInput = ui.getUserInput();
-            if(parser.parse(userInput) instanceof EndCommand) {
+            if (parser.parse(userInput) instanceof EndCommand) {
                 isOnline = false;
-            };
+            }
         }
         ui.showShutdownMessage();
     }

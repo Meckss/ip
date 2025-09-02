@@ -1,7 +1,7 @@
-package Commands;
+package commands;
 
-import Storage.TaskStorage;
-import Storage.ToDoList;
+import storage.TaskStorage;
+import storage.ToDoList;
 
 /**
  * A command that deletes a task from a to-do list and updates the storage.

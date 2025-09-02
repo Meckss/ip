@@ -1,13 +1,13 @@
-package Tasks;
+package tasks;
 
-import Common.MaybeDate;
+import common.MaybeDate;
 
 /**
  * A class representing a task with a deadline, extending the Task class.
  * It includes a description, a task type (D for deadline), and a deadline date.
  */
 public class DeadlineTask extends Task {
-    MaybeDate deadline;
+    private MaybeDate deadline;
 
     /**
      * Constructs a DeadlineTask with the specified description and deadline.
@@ -30,7 +30,7 @@ public class DeadlineTask extends Task {
     public String format() {
         int status;
 
-        if(this.isDone) {
+        if (this.isDone) {
             status = 1;
         } else {
             status = 0;

@@ -1,4 +1,4 @@
-package Commands;
+package commands;
 
 /**
  * A command that signals the termination of the Hope chatbot.

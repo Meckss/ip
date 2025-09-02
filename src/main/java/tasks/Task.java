@@ -1,6 +1,6 @@
-package Tasks;
+package tasks;
 
-import CustomExceptions.RedundantStateChangeException;
+import customexceptions.RedundantStateChangeException;
 
 /**
  * An abstract class representing a generic task with a description, completion status, and type.
@@ -59,7 +59,7 @@ public abstract class Task {
      * @throws RedundantStateChangeException if the task is already marked as done
      */
     public void markAsDone() throws RedundantStateChangeException {
-        if(this.isDone) {
+        if (this.isDone) {
             throw new RedundantStateChangeException("");
         }
         this.isDone = true;
@@ -75,7 +75,7 @@ public abstract class Task {
      * @throws RedundantStateChangeException if the task is already marked as not done
      */
     public void unmark() throws RedundantStateChangeException {
-        if(!this.isDone) {
+        if (!this.isDone) {
             throw new RedundantStateChangeException("");
         }
         this.isDone = false;
@@ -91,7 +91,7 @@ public abstract class Task {
     public String format() {
         int status;
 
-        if(this.isDone) {
+        if (this.isDone) {
             status = 1;
         } else {
             status = 0;
@@ -105,8 +105,8 @@ public abstract class Task {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.getTaskType()).append(" [").
-                append(this.getStatusIcon()).append("] ")
+        sb.append(this.getTaskType()).append(" [")
+                .append(this.getStatusIcon()).append("] ")
                 .append(this.description);
         return sb.toString();
     }

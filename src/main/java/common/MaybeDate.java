@@ -1,4 +1,4 @@
-package Common;
+package common;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,12 +17,6 @@ import java.util.List;
  */
 public class MaybeDate {
 
-    /** The description string, used if the input cannot be parsed as a date. */
-    private String description;
-
-    /** The parsed date, represented as a {@link Temporal} object, or null if parsing fails. */
-    private Temporal date;
-
     /** A list of supported date formats for parsing input strings. */
     private static final List<DateTimeFormatter> SUPPORTED_FORMATS = List.of(
             DateTimeFormatter.ofPattern("yyyy-MM-dd"),
@@ -37,6 +31,12 @@ public class MaybeDate {
 
     /** The formatter for outputting date-times in the format "MMM dd yyyy HHmm". */
     private static final DateTimeFormatter OUTPUT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
+
+    /** The description string, used if the input cannot be parsed as a date. */
+    private String description;
+
+    /** The parsed date, represented as a {@link Temporal} object, or null if parsing fails. */
+    private Temporal date;
 
     /**
      * Constructs a {@code MaybeDate} instance with the specified date and description.
@@ -59,10 +59,11 @@ public class MaybeDate {
      * @param input the input string to parse as a date or store as a description
      * @return a {@code MaybeDate} instance containing either a parsed date or the input description
      */
+    @SuppressWarnings("checkstyle:EmptyCatchBlock")
     public static MaybeDate parse(String input) {
         LocalDateTime temp = null;
         DateTimeFormatterBuilder dateTimeFormatterBuilder = new DateTimeFormatterBuilder();
-        for(DateTimeFormatter format : SUPPORTED_FORMATS) {
+        for (DateTimeFormatter format : SUPPORTED_FORMATS) {
             dateTimeFormatterBuilder.appendOptional(format);
         }
         dateTimeFormatterBuilder.optionalStart()
@@ -89,13 +90,13 @@ public class MaybeDate {
      */
     @Override
     public String toString() {
-        if(date == null) {
+        if (date == null) {
             return description;
         } else {
-            if(date instanceof LocalDate){
+            if (date instanceof LocalDate) {
                 return OUTPUT_DATE_FORMAT.format(date);
             }
-            if( date instanceof LocalDateTime) {
+            if (date instanceof LocalDateTime) {
                 return OUTPUT_DATE_TIME_FORMAT.format(date);
             }
         }

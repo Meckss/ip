@@ -1,8 +1,9 @@
-package Storage;
-
-import Tasks.Task;
+package storage;
 
 import java.util.ArrayList;
+
+import tasks.Task;
+
 
 /**
  * A class representing a to-do list that stores and manages a collection of tasks.
@@ -39,7 +40,7 @@ public class ToDoList {
      * @throws IndexOutOfBoundsException if the index is out of range
      */
     public Task get(int i) {
-        return list.get(i - 1);
+        return list.get(i);
     }
 
     /**
@@ -63,12 +64,12 @@ public class ToDoList {
 
     @Override
     public String toString() {
-        if(list.isEmpty()) {
+        if (list.isEmpty()) {
             return "";
         }
 
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             sb.append(i + 1).append(". ").append(list.get(i).toString()).append("\n");
         }
         return sb.toString();

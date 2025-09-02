@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 /**
  * A class representing a simple to-do task, extending the Task class.
@@ -24,7 +24,7 @@ public class ToDoTask extends Task {
     public String format() {
         int status;
 
-        if(this.isDone) {
+        if (this.isDone) {
             status = 1;
         } else {
             status = 0;

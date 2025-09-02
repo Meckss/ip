@@ -1,15 +1,15 @@
-package Commands;
+package commands;
 
 import java.util.ArrayList;
 
-import Storage.ToDoList;
+import storage.ToDoList;
 
 /**
  * Represents a command to search for tasks in a ToDoList that contain a specified keyword
  * in their description. This command filters tasks from the provided ToDoList and
  * displays matching tasks or a message if no matches are found.
  */
-public class FindCommand implements Command{
+public class FindCommand implements Command {
     private ToDoList toDoList;
 
     /**
@@ -31,15 +31,16 @@ public class FindCommand implements Command{
     @Override
     public void execute(Object o) {
         ToDoList tempToDoList = new ToDoList(new ArrayList<>());
-        if(o instanceof String) {
+        if (o instanceof String) {
             String input = (String) o;
-            for(int i = 1; i <= toDoList.size(); i++) {
-                if(toDoList.get(i).getDescription().contains(input)) {
+            for (int i = 1; i <= toDoList.size(); i++) {
+                if (toDoList.get(i).getDescription().contains(input)) {
                     tempToDoList.add(toDoList.get(i));
                 }
             }
-            if(tempToDoList.size() == 0) {
-                System.out.println("Hark! No quest aligns with thine inquiry, a barren landscape of endeavor doth meet thy gaze.");
+            if (tempToDoList.size() == 0) {
+                System.out.println("Hark! No quest aligns with thine inquiry, a barren landscape of endeavor doth "
+                        + "meet thy gaze.");
                 return;
             }
             System.out.println("Hark, these are the fruits of thy inquiry.");

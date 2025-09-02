@@ -1,8 +1,8 @@
-package Commands;
+package commands;
 
-import Storage.TaskStorage;
-import Storage.ToDoList;
-import Tasks.ToDoTask;
+import storage.TaskStorage;
+import storage.ToDoList;
+import tasks.ToDoTask;
 
 /**
  * A command that adds a to-do task to a to-do list and persists it to storage.
@@ -42,7 +42,7 @@ public class AddToDoTaskCommand implements Command {
     @Override
     public void execute(Object o) {
         String input = (String) o;
-        if(input.isEmpty() || input.equals("todo")) {
+        if (input.isEmpty() || input.equals("todo")) {
             System.out.println("Thou hast overlooked the noble task of bestowing a worthy description upon this "
                     + "endeavor!");
             System.out.println("(Empty input detected, please try again)\n");

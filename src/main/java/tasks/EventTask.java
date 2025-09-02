@@ -1,14 +1,14 @@
-package Tasks;
+package tasks;
 
-import Common.MaybeDate;
+import common.MaybeDate;
 
 /**
  * A class representing an event task with a start and end date, extending the Task class.
  * It includes a description, a task type (E for event), and start and end dates.
  */
 public class EventTask extends Task {
-    MaybeDate from;
-    MaybeDate to;
+    private MaybeDate from;
+    private MaybeDate to;
 
     /**
      * Constructs an EventTask with the specified description, start date, and end date.
@@ -34,7 +34,7 @@ public class EventTask extends Task {
     public String format() {
         int status;
 
-        if(this.isDone) {
+        if (this.isDone) {
             status = 1;
         } else {
             status = 0;

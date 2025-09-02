@@ -1,4 +1,4 @@
-package Commands;
+package commands;
 
 /**
  * An interface defining a command that can be executed with a given input.

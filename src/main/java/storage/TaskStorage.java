@@ -1,13 +1,16 @@
-package Storage;
+package storage;
 
-import Tasks.*;
-
-import java.io.IOException;
-import java.util.ArrayList;
 import java.io.File;
-import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import tasks.DeadlineTask;
+import tasks.EventTask;
+import tasks.Task;
+import tasks.ToDoTask;
 
 /**
  * A utility class for managing the persistence of tasks in a file.
@@ -18,7 +21,7 @@ import java.io.FileWriter;
 public class TaskStorage {
 
     /** The file used for storing tasks. */
-    File file;
+    private File file;
 
     /**
      * Constructs a {@code TaskStorage} instance with the specified file.
@@ -39,7 +42,7 @@ public class TaskStorage {
      * @throws RuntimeException if an error occurs during file writing
      */
     public void append(Task t) {
-        try(FileWriter fileWriter = new FileWriter(file, true);){
+        try (FileWriter fileWriter = new FileWriter(file, true);) {
             fileWriter.append(t.format()).append("\n");
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -55,10 +58,10 @@ public class TaskStorage {
      * @param list the {@link ToDoList} containing tasks to write to the file
      */
     public void update(ToDoList list) {
-        try (FileWriter fileWriter = new FileWriter(file);){
+        try (FileWriter fileWriter = new FileWriter(file);) {
             StringBuilder sb = new StringBuilder();
-            for(int i = 0; i < list.size(); i++) {
-                if(i == list.size() - 1) {
+            for (int i = 0; i < list.size(); i++) {
+                if (i == list.size() - 1) {
                     sb.append(list.get(i).format());
                     break;
                 }
@@ -80,32 +83,33 @@ public class TaskStorage {
      *
      * @return an {@link ArrayList} of {@link Task} objects loaded from the file
      */
+    @SuppressWarnings("checkstyle:MissingSwitchDefault")
     public ArrayList<Task> toList() {
         ArrayList<Task> ans = new ArrayList<Task>();
-        try(Scanner s = new Scanner(file);) {
+        try (Scanner s = new Scanner(file);) {
             int length = 0;
-            while(s.hasNext()) {
+            while (s.hasNext()) {
                 String tempRawData = s.nextLine();
                 String[] tempData = tempRawData.split("\\|");
                 String dataType = tempData[0];
                 switch (dataType) {
                 case("T"):
                     Task t = new ToDoTask(tempData[2]);
-                    if(tempData[1].equals("1")) {
+                    if (tempData[1].equals("1")) {
                         t.markAsDone();
                     }
                     ans.add(t);
                     break;
                 case("D"):
                     Task t1 = new DeadlineTask(tempData[2], tempData[3]);
-                    if(tempData[1].equals("1")) {
+                    if (tempData[1].equals("1")) {
                         t1.markAsDone();
                     }
                     ans.add(t1);
                     break;
                 case("E"):
                     Task t2 = new EventTask(tempData[2], tempData[3], tempData[4]);
-                    if(tempData[1].equals("1")) {
+                    if (tempData[1].equals("1")) {
                         t2.markAsDone();
                     }
                     ans.add(t2);
@@ -113,7 +117,7 @@ public class TaskStorage {
                 }
             }
             return ans;
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             return ans;
         }
 

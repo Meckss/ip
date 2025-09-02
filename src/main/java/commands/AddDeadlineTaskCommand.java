@@ -1,8 +1,8 @@
-package Commands;
+package commands;
 
-import Storage.TaskStorage;
-import Storage.ToDoList;
-import Tasks.DeadlineTask;
+import storage.TaskStorage;
+import storage.ToDoList;
+import tasks.DeadlineTask;
 
 /**
  *  Adds a new {@link DeadlineTask} to storage.

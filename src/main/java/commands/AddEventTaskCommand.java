@@ -1,8 +1,8 @@
-package Commands;
+package commands;
 
-import Storage.TaskStorage;
-import Storage.ToDoList;
-import Tasks.EventTask;
+import storage.TaskStorage;
+import storage.ToDoList;
+import tasks.EventTask;
 
 /**
  * A command that adds an event task to a to-do list and persists it to storage.
@@ -45,20 +45,20 @@ public class AddEventTaskCommand implements Command {
     @Override
     public void execute(Object o) {
         String input = (String) o;
-        if(input.equals("event")) {
+        if (input.equals("event")) {
             System.out.println("Thou hast overlooked the noble task of bestowing a worthy description upon this "
                     + "endeavor!");
             System.out.println("(Looks like you forgot to input description, from and to! Try again)\n");
             return;
         }
         String[] info = input.split("/from");
-        if(info.length == 1) {
+        if (info.length == 1) {
             System.out.println("Alas, fair traveler, thy input bears a flaw; kindly make haste and attempt anew!");
             System.out.println("(Incorrect input, please try again)\n");
             return;
         }
         String[] times = info[1].split("/to");
-        if(times.length == 1) {
+        if (times.length == 1) {
             System.out.println("Alas, fair traveler, thy input bears a flaw; kindly make haste and attempt anew!");
             System.out.println("(Incorrect input, please try again)\n");
             return;

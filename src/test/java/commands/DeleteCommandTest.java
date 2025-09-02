@@ -1,8 +1,8 @@
-package Commands;
+package commands;
 
-import Storage.TaskStorage;
-import Storage.ToDoList;
-import Tasks.ToDoTask;
+import storage.TaskStorage;
+import storage.ToDoList;
+import tasks.ToDoTask;
 import static org.mockito.Mockito.mock;
 import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;

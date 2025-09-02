@@ -1,8 +1,8 @@
-package Commands;
+package commands;
 
-import CustomExceptions.RedundantStateChangeException;
-import Storage.TaskStorage;
-import Storage.ToDoList;
+import customexceptions.RedundantStateChangeException;
+import storage.TaskStorage;
+import storage.ToDoList;
 
 /**
  * A command that marks a task as done in a to-do list and updates the storage.
@@ -54,12 +54,12 @@ public class MarkCommand implements Command {
                 return;
             }
             int input = Integer.parseInt((String) o);
-            if(input > toDoList.size()) {
+            if (input > toDoList.size()) {
                 System.out.println("Thy request doth stray beyond the hallowed limits.\n"
                         + "(The number you have input is greater than the number of tasks you currently have)\n");
                 return;
             }
-            if(input < 1) {
+            if (input < 1) {
                 System.out.println("Doth this be a jest, good sir?\n"
                         + "(Negative numbers are not accepted as input)\n");
                 return;

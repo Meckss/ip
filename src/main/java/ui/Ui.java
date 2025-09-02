@@ -1,4 +1,4 @@
-package Ui;
+package ui;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -8,19 +8,18 @@ import java.util.Scanner;
  * It uses a Scanner for input and maintains a collection of predefined messages.
  */
 public class Ui {
+    /** A HashMap storing predefined message strings, mapped by their keys. */
+    private static final HashMap<String, String> MESSAGE_LIST = new HashMap<>();
 
     /** The Scanner object used to read user input from the console. */
     private final Scanner sc;
-
-    /** A HashMap storing predefined message strings, mapped by their keys. */
-    private static HashMap<String, String> MESSAGE_LIST = new HashMap<>();
 
     /**
      * Static initialization block to populate the MESSAGELIST with predefined messages.
      */
     static {
-        MESSAGE_LIST.put("MESSAGE_WELCOME", "Greetings, fair wanderer!\nI am Hope, your humble companion. How might I" +
-                " assist thee on this grand quest?");
+        MESSAGE_LIST.put("MESSAGE_WELCOME", "Greetings, fair wanderer!\nI am Hope, your humble companion. How might I"
+                + " assist thee on this grand quest?");
         MESSAGE_LIST.put("MESSAGE_INVALID_COMMAND", "Pardon me, noble companion, but what dost thou mean to convey?");
         MESSAGE_LIST.put("MESSAGE_INIT_FAILED", "Error creating file or directory, exitting...");
         MESSAGE_LIST.put("MESSAGE_SHUTDOWN", "Fare thee well, noble friend!");
