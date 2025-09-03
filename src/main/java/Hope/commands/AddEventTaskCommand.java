@@ -59,14 +59,14 @@ public class AddEventTaskCommand implements Command {
                     (Incorrect input, please try again)
                     """;
         }
-        String[] times = info[1].split("/to");
-        if (times.length == 1) {
+        String[] toAndFrom = info[1].split("/to");
+        if (toAndFrom.length == 1) {
             return """
                     Alas, fair traveler, thy input bears a flaw; kindly make haste and attempt anew!
                     (Incorrect input, please try again)
                     """;
         }
-        EventTask temp = new EventTask(info[0].trim(), times[0].trim(), times[1].trim());
+        EventTask temp = new EventTask(info[0].trim(), toAndFrom[0].trim(), toAndFrom[1].trim());
         toDoList.add(temp);
         taskStorage.append(temp);
         return "Behold, this quest hath been entrusted!:\n"

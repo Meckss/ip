@@ -44,15 +44,15 @@ public class DeleteCommand implements Command {
     @Override
     public String execute(Object o) {
         if (o instanceof String) {
+            int input;
             try {
-                int input = Integer.parseInt((String) o);
+                input = Integer.parseInt((String) o);
             } catch (NumberFormatException e) {
                 return """
                         Pray, employ the noble digits as thy guiding input!
                         (Please use numerics as input only)
                         """;
             }
-            int input = Integer.parseInt((String) o);
             if (input > toDoList.size()) {
                 return """
                         Thy request doth stray beyond the hallowed limits.
