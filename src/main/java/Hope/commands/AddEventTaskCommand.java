@@ -53,14 +53,14 @@ public class AddEventTaskCommand implements Command {
                     """;
         }
         String[] info = input.split("/from");
-        if (info.length == 1) {
+        if (info.length != 2) {
             return """
                     Alas, fair traveler, thy input bears a flaw; kindly make haste and attempt anew!
                     (Incorrect input, please try again)
                     """;
         }
         String[] toAndFrom = info[1].split("/to");
-        if (toAndFrom.length == 1) {
+        if (toAndFrom.length != 2) {
             return """
                     Alas, fair traveler, thy input bears a flaw; kindly make haste and attempt anew!
                     (Incorrect input, please try again)

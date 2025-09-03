@@ -45,7 +45,7 @@ public class AddDeadlineTaskCommand implements Command {
                     + ("(Looks like you forgot to input a description and a deadline! Try again)\n");
         }
         String[] info = input.split("/by");
-        if (info.length == 1) {
+        if (info.length != 2) {
             return "Verily, thou hast erred in thy response; endeavor once more, brave soul!"
                     + "(Incorrect input, please try again)\n";
         }
