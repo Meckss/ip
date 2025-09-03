@@ -1,4 +1,4 @@
-package storage;
+package Hope.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import tasks.DeadlineTask;
-import tasks.EventTask;
-import tasks.Task;
-import tasks.ToDoTask;
+import Hope.tasks.DeadlineTask;
+import Hope.tasks.EventTask;
+import Hope.tasks.Task;
+import Hope.tasks.ToDoTask;
 
 /**
  * A utility class for managing the persistence of tasks in a file.

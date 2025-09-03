@@ -1,6 +1,6 @@
-package commands;
+package Hope.commands;
 
-import storage.ToDoList;
+import Hope.storage.ToDoList;
 
 /**
  * A command that displays all tasks in a to-do list.
@@ -31,13 +31,14 @@ public class ListCommand implements Command {
      * @param o the input object (unused in this implementation)
      */
     @Override
-    public void execute(Object o) {
+    public String execute(Object o) {
         if (toDoList.size() == 0) {
-            System.out.println("Thou art unburdened by quests in this moment, dear knight.\n"
-                    + "(There are currently no tasks in your to do list)\n");
-            return;
+            return """
+                    Thou art unburdened by quests in this moment, dear knight.
+                    (There are currently no tasks in your to do list)
+                    """;
         }
-        System.out.println("Hark! Behold the noble quests that grace thy scroll of undertakings!\n");
-        System.out.println(toDoList.toString());
+        return "Hark! Behold the noble quests that grace thy scroll of undertakings!\n"
+                + toDoList.toString();
     }
 }

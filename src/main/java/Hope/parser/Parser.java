@@ -1,20 +1,20 @@
-package parser;
+package Hope.parser;
 
 import java.util.HashMap;
 import java.util.Set;
 
-import commands.AddDeadlineTaskCommand;
-import commands.AddEventTaskCommand;
-import commands.AddToDoTaskCommand;
-import commands.Command;
-import commands.DeleteCommand;
-import commands.EndCommand;
-import commands.FindCommand;
-import commands.ListCommand;
-import commands.MarkCommand;
-import commands.UnmarkCommand;
-import storage.TaskStorage;
-import storage.ToDoList;
+import Hope.commands.AddDeadlineTaskCommand;
+import Hope.commands.AddEventTaskCommand;
+import Hope.commands.AddToDoTaskCommand;
+import Hope.commands.Command;
+import Hope.commands.DeleteCommand;
+import Hope.commands.EndCommand;
+import Hope.commands.FindCommand;
+import Hope.commands.ListCommand;
+import Hope.commands.MarkCommand;
+import Hope.commands.UnmarkCommand;
+import Hope.storage.TaskStorage;
+import Hope.storage.ToDoList;
 
 
 /**
@@ -77,25 +77,14 @@ public class Parser {
         GET_COMMAND.put("find", new FindCommand(toDoList));
     }
 
-    /**
-     * Parses the user input to identify and execute a command.
-     * Splits the input into a command name and an optional argument. If the command name is valid
-     * (contained in {@link #COMMANDS}), the corresponding {@link Command} is executed with the
-     * argument. If the command is invalid, an error message is printed, and the list command is
-     * executed by default.
-     *
-     * @param input the user input string containing the command and optional argument
-     * @return the executed {@link Command} object, or the list command if the input is invalid
-     */
-    public Command parse(String input) {
+
+    public String parse(String input) {
         String[] instructions = input.split(" ", 2);
         String inputCommand = instructions[0];
         String argument = instructions.length == 2 ? instructions[1] : input;
         if (COMMANDS.contains(inputCommand)) {
-            GET_COMMAND.get(inputCommand).execute(argument.trim());
-            return GET_COMMAND.get(inputCommand);
+            return GET_COMMAND.get(inputCommand).execute(argument.trim());
         }
-        System.out.println("Pardon me, noble companion, but what dost thou mean to convey?\n");
-        return GET_COMMAND.get("list");
+        return "Pardon me, noble companion, but what dost thou mean to convey?\n";
     }
 }

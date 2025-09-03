@@ -1,7 +1,7 @@
-package commands;
+package Hope.commands;
 
-import storage.TaskStorage;
-import storage.ToDoList;
+import Hope.storage.TaskStorage;
+import Hope.storage.ToDoList;
 
 /**
  * A command that deletes a task from a to-do list and updates the storage.
@@ -42,34 +42,39 @@ public class DeleteCommand implements Command {
      *          of the task to delete
      */
     @Override
-    public void execute(Object o) {
+    public String execute(Object o) {
         if (o instanceof String) {
             try {
                 int input = Integer.parseInt((String) o);
             } catch (NumberFormatException e) {
-                System.out.println("Pray, employ the noble digits as thy guiding input!\n"
-                        + "(Please use numerics as input only)\n");
-                return;
+                return """
+                        Pray, employ the noble digits as thy guiding input!
+                        (Please use numerics as input only)
+                        """;
             }
             int input = Integer.parseInt((String) o);
             if (input > toDoList.size()) {
-                System.out.println("Thy request doth stray beyond the hallowed limits.\n"
-                        + "(The number you have input is greater than the number of tasks you currently have)\n");
-                return;
+                return """
+                        Thy request doth stray beyond the hallowed limits.
+                        (The number you have input is greater than the number of tasks you currently have)
+                        """;
             }
             if (input < 1) {
-                System.out.println("Doth this be a jest, good sir?\n"
-                        + "(0 and negative numbers are not accepted as input)\n");
-                return;
+                return """
+                        Doth this be a jest, good sir?
+                        (0 and negative numbers are not accepted as input)
+                        """;
             }
 
-            System.out.println("Heed this decree! This noble quest hath been cast aside.");
-            System.out.println(toDoList.get(input - 1).toString());
+            String temporary = "Heed this decree! This noble quest hath been cast aside.\n"
+                    + toDoList.get(input - 1).toString();
             toDoList.remove(input - 1);
             taskStorage.update(toDoList);
-            System.out.println("Lo! Thou art now bestowed with " + toDoList.size()
-                    + " noble quests upon thy parchment of duties.");
-            System.out.println("(You now have " + toDoList.size() + " tasks in the to do list)\n");
+            return temporary + "\nLo! Thou art now bestowed with "
+                    + toDoList.size()
+                    + " noble quests upon thy parchment of duties.\n"
+                    + "(You now have " + toDoList.size() + " tasks in the to do list)\n";
         }
+        return "Something went wrong :("; // should never come to this as parser ensures string input
     }
 }

@@ -1,8 +1,8 @@
-package commands;
+package Hope.commands;
 
-import storage.TaskStorage;
-import storage.ToDoList;
-import tasks.EventTask;
+import Hope.storage.TaskStorage;
+import Hope.storage.ToDoList;
+import Hope.tasks.EventTask;
 
 /**
  * A command that adds an event task to a to-do list and persists it to storage.
@@ -43,33 +43,37 @@ public class AddEventTaskCommand implements Command {
      *          start time, and end time in the format "description /from start /to end"
      */
     @Override
-    public void execute(Object o) {
+    public String execute(Object o) {
         String input = (String) o;
         if (input.equals("event")) {
-            System.out.println("Thou hast overlooked the noble task of bestowing a worthy description upon this "
-                    + "endeavor!");
-            System.out.println("(Looks like you forgot to input description, from and to! Try again)\n");
-            return;
+            return """
+                    Thou hast overlooked the noble task of bestowing a worthy description upon this \
+                    endeavor!
+                    (Looks like you forgot to input description, from and to! Try again)
+                    """;
         }
         String[] info = input.split("/from");
         if (info.length == 1) {
-            System.out.println("Alas, fair traveler, thy input bears a flaw; kindly make haste and attempt anew!");
-            System.out.println("(Incorrect input, please try again)\n");
-            return;
+            return """
+                    Alas, fair traveler, thy input bears a flaw; kindly make haste and attempt anew!
+                    (Incorrect input, please try again)
+                    """;
         }
         String[] times = info[1].split("/to");
         if (times.length == 1) {
-            System.out.println("Alas, fair traveler, thy input bears a flaw; kindly make haste and attempt anew!");
-            System.out.println("(Incorrect input, please try again)\n");
-            return;
+            return """
+                    Alas, fair traveler, thy input bears a flaw; kindly make haste and attempt anew!
+                    (Incorrect input, please try again)
+                    """;
         }
         EventTask temp = new EventTask(info[0].trim(), times[0].trim(), times[1].trim());
         toDoList.add(temp);
         taskStorage.append(temp);
-        System.out.println("Behold, this quest hath been entrusted!:");
-        System.out.println(temp.toString() + "\n");
-        System.out.println("Lo! Thou art now bestowed with " + toDoList.size()
-                + " noble quests upon thy parchment of duties.");
-        System.out.println("(You now have " + toDoList.size() + " tasks in the to do list)\n");
+        return "Behold, this quest hath been entrusted!:\n"
+                + temp.toString()
+                + "\nLo! Thou art now bestowed with "
+                + toDoList.size()
+                + " noble quests upon thy parchment of duties.\n"
+                + "(You now have " + toDoList.size() + " tasks in the to do list)\n";
     }
 }

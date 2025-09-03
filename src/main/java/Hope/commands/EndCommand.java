@@ -1,4 +1,4 @@
-package commands;
+package Hope.commands;
 
 /**
  * A command that signals the termination of the Hope chatbot.
@@ -17,6 +17,7 @@ public class EndCommand implements Command {
      * @param o the input object (unused in this implementation)
      */
     @Override
-    public void execute(Object o) {
+    public String execute(Object o) {
+        return "Fare thee well, noble friend!";
     }
 }

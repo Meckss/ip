@@ -1,6 +1,6 @@
-package tasks;
+package Hope.tasks;
 
-import common.MaybeDate;
+import Hope.common.MaybeDate;
 
 /**
  * A class representing a task with a deadline, extending the Task class.

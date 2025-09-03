@@ -1,6 +1,6 @@
-package tasks;
+package Hope.tasks;
 
-import customexceptions.RedundantStateChangeException;
+import Hope.customexceptions.RedundantStateChangeException;
 
 /**
  * An abstract class representing a generic task with a description, completion status, and type.

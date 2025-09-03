@@ -1,8 +1,8 @@
-package commands;
+package Hope.commands;
 
-import customexceptions.RedundantStateChangeException;
-import storage.TaskStorage;
-import storage.ToDoList;
+import Hope.customexceptions.RedundantStateChangeException;
+import Hope.storage.TaskStorage;
+import Hope.storage.ToDoList;
 
 /**
  * A command that marks a task as done in a to-do list and updates the storage.
@@ -44,37 +44,42 @@ public class MarkCommand implements Command {
      *          of the task to mark as done
      */
     @Override
-    public void execute(Object o) {
+    public String execute(Object o) {
         if (o instanceof String) {
             try {
                 int input = Integer.parseInt((String) o);
             } catch (NumberFormatException e) {
-                System.out.println("Pray, employ the noble digits as thy guiding input!\n"
-                        + "(Please use numerics as input only)\n");
-                return;
+                return """
+                        Pray, employ the noble digits as thy guiding input!
+                        (Please use numerics as input only)
+                        """;
             }
             int input = Integer.parseInt((String) o);
             if (input > toDoList.size()) {
-                System.out.println("Thy request doth stray beyond the hallowed limits.\n"
-                        + "(The number you have input is greater than the number of tasks you currently have)\n");
-                return;
+                return """
+                        Thy request doth stray beyond the hallowed limits.
+                        (The number you have input is greater than the number of tasks you currently have)
+                        """;
             }
             if (input < 1) {
-                System.out.println("Doth this be a jest, good sir?\n"
-                        + "(Negative numbers are not accepted as input)\n");
-                return;
+                return """
+                        Doth this be a jest, good sir?
+                        (Negative numbers are not accepted as input)
+                        """;
             }
             try {
                 toDoList.get(input - 1).markAsDone();
             } catch (RedundantStateChangeException e) {
-                System.out.println("Verily, the noble quest was marked from the very outset; hath thy memory slipped"
-                        + " away like a fleeting shadow?");
-                System.out.println("(The task was already marked to begin with)\n");
-                return;
+                return """
+                        Verily, the noble quest was marked from the very outset; hath thy memory slipped\
+                         away like a fleeting shadow?
+                        (The task was already marked to begin with)
+                        """;
             }
             taskStorage.update(toDoList);
-            System.out.println("Hark, I declare the #" + input + " noble endeavor accomplished!");
-            System.out.println(toDoList.get(input - 1) + "\n");
+            return "Hark, I declare the #" + input + " noble endeavor accomplished!\n"
+                    + toDoList.get(input - 1) + "\n";
         }
+        return "Something went wrong :("; // should never come to this as parser ensures string input
     }
 }

@@ -1,8 +1,8 @@
-package commands;
+package Hope.commands;
 
 import java.util.ArrayList;
 
-import storage.ToDoList;
+import Hope.storage.ToDoList;
 
 /**
  * Represents a command to search for tasks in a ToDoList that contain a specified keyword
@@ -29,23 +29,22 @@ public class FindCommand implements Command {
      * @param o the input object, expected to be a String representing the keyword to search for
      */
     @Override
-    public void execute(Object o) {
+    public String execute(Object o) {
         ToDoList tempToDoList = new ToDoList(new ArrayList<>());
         if (o instanceof String) {
             String input = (String) o;
-            for (int i = 1; i <= toDoList.size(); i++) {
+            for (int i = 0; i < toDoList.size(); i++) {
                 if (toDoList.get(i).getDescription().contains(input)) {
                     tempToDoList.add(toDoList.get(i));
                 }
             }
             if (tempToDoList.size() == 0) {
-                System.out.println("Hark! No quest aligns with thine inquiry, a barren landscape of endeavor doth "
-                        + "meet thy gaze.");
-                return;
+                return "Hark! No quest aligns with thine inquiry, a barren landscape of endeavor doth "
+                        + "meet thy gaze.";
             }
-            System.out.println("Hark, these are the fruits of thy inquiry.");
-            System.out.printf(tempToDoList.toString());
+            return "Hark, these are the fruits of thy inquiry.\n"
+                    + tempToDoList.toString();
         }
-
+        return "Something went wrong :("; // should never come to this as parser ensures string input
     }
 }

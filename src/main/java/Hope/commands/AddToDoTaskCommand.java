@@ -1,8 +1,8 @@
-package commands;
+package Hope.commands;
 
-import storage.TaskStorage;
-import storage.ToDoList;
-import tasks.ToDoTask;
+import Hope.storage.TaskStorage;
+import Hope.storage.ToDoList;
+import Hope.tasks.ToDoTask;
 
 /**
  * A command that adds a to-do task to a to-do list and persists it to storage.
@@ -40,22 +40,24 @@ public class AddToDoTaskCommand implements Command {
      * @param o the input object, expected to be a {@code String} containing the task description
      */
     @Override
-    public void execute(Object o) {
+    public String execute(Object o) {
         String input = (String) o;
         if (input.isEmpty() || input.equals("todo")) {
-            System.out.println("Thou hast overlooked the noble task of bestowing a worthy description upon this "
-                    + "endeavor!");
-            System.out.println("(Empty input detected, please try again)\n");
-            return;
+            return """
+                    Thou hast overlooked the noble task of bestowing a worthy description upon this \
+                    endeavor!
+                    (Empty input detected, please try again)
+                    """;
         }
         ToDoTask temp = new ToDoTask(input);
         toDoList.add(temp);
         taskStorage.append(temp);
-        System.out.println("Behold, this quest hath been entrusted!");
-        System.out.println(temp.toString() + "\n");
-        System.out.println("Lo! Thou art now bestowed with " + toDoList.size()
-                + " noble quests upon thy parchment of duties.");
-        System.out.println("(You now have " + toDoList.size() + " tasks in the list)\n");
+        return "Behold, this quest hath been entrusted!\n"
+                + temp.toString()
+                + "\nLo! Thou art now bestowed with "
+                + toDoList.size()
+                + " noble quests upon thy parchment of duties.\n"
+                + "(You now have " + toDoList.size() + " tasks in the list)\n";
     }
 }
 

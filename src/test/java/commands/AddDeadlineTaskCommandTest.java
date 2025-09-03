@@ -1,8 +1,9 @@
 package commands;
 
-import storage.TaskStorage;
-import storage.ToDoList;
-import tasks.DeadlineTask;
+import Hope.commands.AddDeadlineTaskCommand;
+import Hope.storage.TaskStorage;
+import Hope.storage.ToDoList;
+import Hope.tasks.DeadlineTask;
 import static org.mockito.Mockito.mock;
 import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
@@ -20,7 +21,7 @@ public class AddDeadlineTaskCommandTest {
         AddDeadlineTaskCommand addDeadlineTaskCommand = new AddDeadlineTaskCommand(toDoList, taskStorage);
         addDeadlineTaskCommand.execute(validInput);
         DeadlineTask expectedOutputToString = new DeadlineTask("test", "02/03/2003");
-        assertEquals(expectedOutputToString.toString(), toDoList.get(1).toString(), "The added deadline task has the" +
+        assertEquals(expectedOutputToString.toString(), toDoList.get(0).toString(), "The added deadline task has the" +
                 " correct description and deadline");
     }
 

@@ -1,4 +1,4 @@
-package commands;
+package Hope.commands;
 
 /**
  * An interface defining a command that can be executed with a given input.
@@ -7,9 +7,9 @@ package commands;
 public interface Command {
 
     /**
-     * Executes the command with the specified input.
+     * Executes the command with the specified input, returning a string
      *
      * @param input the input object to be processed by the command
      */
-    void execute(Object input);
+    String execute(Object input);
 }

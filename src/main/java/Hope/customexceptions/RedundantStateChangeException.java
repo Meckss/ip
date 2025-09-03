@@ -1,4 +1,4 @@
-package customexceptions;
+package Hope.customexceptions;
 
 /**
  * An exception thrown when attempting to change the state of a task redundantly.

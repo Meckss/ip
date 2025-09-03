@@ -1,11 +1,11 @@
+package Hope;
+
 import java.io.File;
 import java.io.IOException;
 
-import commands.EndCommand;
-import parser.Parser;
-import storage.TaskStorage;
-import storage.ToDoList;
-import ui.Ui;
+import Hope.parser.Parser;
+import Hope.storage.TaskStorage;
+import Hope.storage.ToDoList;
 
 /**
  * A chatbot application named Hope that manages a to-do list.
@@ -27,9 +27,6 @@ public class Hope {
     /** The to-do list containing the user's tasks. */
     private ToDoList toDoList;
 
-    /** The user interface for interacting with the user. */
-    private Ui ui;
-
     /** The parser for interpreting user input and executing commands. */
     private Parser parser;
 
@@ -39,9 +36,8 @@ public class Hope {
      * Creates a data file (Hope.txt) in the ./data directory if it does not exist.
      * If file creation fails, an error message is displayed via the user interface.
      */
-    public Hope() {
-        ui = new Ui();
-        this.data = new File("./data/Hope.txt");
+    public Hope() throws IOException {
+        this.data = new File("./data/HopeData.txt");
         this.taskStorage = new TaskStorage(data);
         this.isOnline = true;
         this.toDoList = new ToDoList(taskStorage.toList());
@@ -58,33 +54,12 @@ public class Hope {
                 data.createNewFile();
             }
         } catch (IOException e) {
-            ui.showMessageInitFailed();
+            throw e;
         }
     }
 
-    /**
-     * Runs the chatbot, starting the main interaction loop.
-     * Displays a welcome message, processes user input through the parser,
-     * and continues until an {@link EndCommand} is received, at which point
-     * a shutdown message is displayed.
-     */
-    public void run() {
-        ui.showMessageWelcome();
-        while (isOnline) {
-            String userInput = ui.getUserInput();
-            if (parser.parse(userInput) instanceof EndCommand) {
-                isOnline = false;
-            }
-        }
-        ui.showShutdownMessage();
+    public String getResponse(String input) {
+        return parser.parse(input);
     }
 
-    /**
-     * The main entry point for the Hope chatbot application.
-     * Creates a new {@code Hope} instance and starts the chatbot.
-     */
-    public static void main(String[] args) {
-        Hope hope = new Hope();
-        hope.run();
-    }
 }

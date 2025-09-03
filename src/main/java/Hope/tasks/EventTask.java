@@ -1,6 +1,6 @@
-package tasks;
+package Hope.tasks;
 
-import common.MaybeDate;
+import Hope.common.MaybeDate;
 
 /**
  * A class representing an event task with a start and end date, extending the Task class.
