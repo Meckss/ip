@@ -44,7 +44,7 @@ public class MaybeDate {
      * @param date        the parsed date as a {@link Temporal} object, or null if no date is parsed
      * @param description the description string, used if no date is parsed
      */
-    private MaybeDate(LocalDateTime date, String description) {
+    private MaybeDate(Temporal date, String description) {
         this.date = date;
         this.description = description;
     }
@@ -71,10 +71,15 @@ public class MaybeDate {
                 .appendOptional(DateTimeFormatter.ofPattern(" HHmm"))
                 .optionalEnd();
         try {
-            temp = LocalDateTime.parse(input, dateTimeFormatterBuilder.toFormatter());
-            return new MaybeDate(temp, null);
-        } catch (DateTimeParseException e) {
-
+            LocalDateTime dateTime = LocalDateTime.parse(input, dateTimeFormatterBuilder.toFormatter());
+            return new MaybeDate(dateTime, null);
+        } catch (DateTimeParseException ignored) {
+            try {
+                LocalDate date = LocalDate.parse(input, dateTimeFormatterBuilder.toFormatter());
+                return new MaybeDate(date, null);
+            } catch (DateTimeParseException ignored2) {
+                //purposefully empty
+            }
         }
 
         return new MaybeDate(null, input);
