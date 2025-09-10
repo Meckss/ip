@@ -1,8 +1,19 @@
 package Hope.tasks;
 
+/**
+ * Represents a task with a fixed duration, extending the {@link Task} class.
+ * This class includes a duration attribute to specify the time required to complete the task.
+ * It provides methods to format the task for storage and to display the task as a string.
+ */
 public class FixedDurationTask extends Task {
     private String duration;
 
+    /**
+     * Constructs a new {@code FixedDurationTask} with the specified description and duration.
+     *
+     * @param description the description of the task
+     * @param duration    the duration required to complete the task
+     */
     public FixedDurationTask(String description, String duration) {
         super(description, TaskType.FD);
         this.duration = duration;
