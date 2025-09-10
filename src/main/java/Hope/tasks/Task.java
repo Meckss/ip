@@ -17,7 +17,8 @@ public abstract class Task {
     protected enum TaskType {
         T,
         D,
-        E
+        E,
+        FD
     }
     protected TaskType type;
 

@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import Hope.tasks.DeadlineTask;
 import Hope.tasks.EventTask;
+import Hope.tasks.FixedDurationTask;
 import Hope.tasks.Task;
 import Hope.tasks.ToDoTask;
 
@@ -113,6 +114,13 @@ public class TaskStorage {
                         t2.markAsDone();
                     }
                     ans.add(t2);
+                    break;
+                case("FD"):
+                    Task t3 = new FixedDurationTask(tempData[2], tempData[3]);
+                    if (tempData[1].equals("1")) {
+                        t3.markAsDone();
+                    }
+                    ans.add(t3);
                     break;
                 default:
                     throw new IllegalStateException("Something went wrong in "

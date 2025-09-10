@@ -5,6 +5,7 @@ import java.util.Set;
 
 import Hope.commands.AddDeadlineTaskCommand;
 import Hope.commands.AddEventTaskCommand;
+import Hope.commands.AddFixedDurationTaskCommand;
 import Hope.commands.AddToDoTaskCommand;
 import Hope.commands.Command;
 import Hope.commands.DeleteCommand;
@@ -36,7 +37,8 @@ public class Parser {
             "deadline",
             "event",
             "delete",
-            "find"
+            "find",
+            "fdt"
     );
 
     /** A mapping of command names to their corresponding {@link Command} implementations. */
@@ -75,6 +77,7 @@ public class Parser {
         GET_COMMAND.put("event", new AddEventTaskCommand(toDoList, taskStorage));
         GET_COMMAND.put("delete", new DeleteCommand(toDoList, taskStorage));
         GET_COMMAND.put("find", new FindCommand(toDoList));
+        GET_COMMAND.put("fdt", new AddFixedDurationTaskCommand(toDoList, taskStorage));
     }
 
 
