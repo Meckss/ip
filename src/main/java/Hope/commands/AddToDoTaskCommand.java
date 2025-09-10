@@ -41,6 +41,7 @@ public class AddToDoTaskCommand implements Command {
      */
     @Override
     public String execute(Object o) {
+        assert(o instanceof String);
         String input = (String) o;
         if (input.isEmpty() || input.equals("todo")) {
             return """
