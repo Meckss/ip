@@ -44,6 +44,7 @@ public class AddEventTaskCommand implements Command {
      */
     @Override
     public String execute(Object o) {
+        assert(o instanceof String);
         String input = (String) o;
         if (input.equals("event")) {
             return """
