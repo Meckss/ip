@@ -114,6 +114,9 @@ public class TaskStorage {
                     }
                     ans.add(t2);
                     break;
+                default:
+                    throw new IllegalStateException("Something went wrong in "
+                            + "TaskStorage.tolist(), unexpected data type:  " + dataType);
                 }
             }
             return ans;
