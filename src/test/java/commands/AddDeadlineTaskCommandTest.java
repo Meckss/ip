@@ -1,9 +1,9 @@
 package commands;
 
-import Hope.commands.AddDeadlineTaskCommand;
-import Hope.storage.TaskStorage;
-import Hope.storage.ToDoList;
-import Hope.tasks.DeadlineTask;
+import hope.commands.AddDeadlineTaskCommand;
+import hope.storage.TaskStorage;
+import hope.storage.ToDoList;
+import hope.tasks.DeadlineTask;
 import static org.mockito.Mockito.mock;
 import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;

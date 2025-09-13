@@ -1,9 +1,9 @@
 package commands;
 
-import Hope.commands.DeleteCommand;
-import Hope.storage.TaskStorage;
-import Hope.storage.ToDoList;
-import Hope.tasks.ToDoTask;
+import hope.commands.DeleteCommand;
+import hope.storage.TaskStorage;
+import hope.storage.ToDoList;
+import hope.tasks.ToDoTask;
 import static org.mockito.Mockito.mock;
 import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
