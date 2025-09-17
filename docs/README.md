@@ -21,6 +21,8 @@ Mac users: Ensure you have the precise JDK version prescribed [here](https://se-
 4. Open a command terminal, cd into the folder you put the jar file in, and use the java -jar hope.jar command 
 to run the application.
 A GUI similar to the below should appear in a few seconds.
+
+
 ![img.png](sampleimg.png)
 
 
