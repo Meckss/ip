@@ -3,88 +3,125 @@ package commands;
 import hope.commands.DeleteCommand;
 import hope.storage.TaskStorage;
 import hope.storage.ToDoList;
-import hope.tasks.ToDoTask;
+import hope.tasks.Task;
+
 import static org.mockito.Mockito.mock;
 import org.junit.jupiter.api.Test;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verifyNoInteractions;
+
+import org.junit.jupiter.api.BeforeEach;
+import static org.mockito.Mockito.*;
 
 public class DeleteCommandTest {
-    @Test
-    public void execute_negativeNumberInput_errorMessagePrinted() {
-        String negativeNumberInput = "-1";
-        String expectedMessage = "Doth this be a jest, good sir?\n(0 and negative numbers are not accepted as input)\n";
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        PrintStream originalOutput = System.out;
-        System.setOut(new PrintStream(outputStream));
-        ToDoList toDoList = new ToDoList(new ArrayList<>());
-        TaskStorage taskStorage =  mock(TaskStorage.class);
-        DeleteCommand deleteCommand = new DeleteCommand(toDoList, taskStorage);
 
-        try {
-            deleteCommand.execute(negativeNumberInput);
-            String actualOutput = outputStream.toString();
-            assertEquals(expectedMessage.trim(), actualOutput.trim(), "The printed error message for negative input should match.");
-            verifyNoInteractions(taskStorage);
-        } finally {
-            System.setOut(originalOutput);
-        }
+    private ToDoList toDoList;
+    private TaskStorage taskStorage;
+    private DeleteCommand command;
+
+    @BeforeEach
+    void setUp() {
+        // Create mock objects for ToDoList and TaskStorage
+        toDoList = mock(ToDoList.class);
+        taskStorage = mock(TaskStorage.class);
+        command = new DeleteCommand(toDoList, taskStorage);
     }
 
     @Test
-    public void execute_greaterThanCurrentListSizeInput_errorMessagePrinted() {
-        String invalidInput = "2";
-        String expectedMessage = "Thy request doth stray beyond the hallowed limits.\n(The number you have input is greater than the number of tasks you currently have)\n";
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        PrintStream originalOutput = System.out;
-        System.setOut(new PrintStream(outputStream));
-        ToDoList toDoList = new ToDoList(new ArrayList<>());
-        TaskStorage taskStorage = mock(TaskStorage.class);
-        DeleteCommand deleteCommand = new DeleteCommand(toDoList, taskStorage);
+    void testExecute_NonNumericInput_ReturnsErrorMessage() {
+        // Arrange
+        String input = "abc";
 
-        try {
-            deleteCommand.execute(invalidInput);
-            String actualOutput = outputStream.toString();
-            assertEquals(expectedMessage.trim(), actualOutput.trim(), "The printed error message for invalid input should match.");
-            verifyNoInteractions(taskStorage);
-        } finally {
-            System.setOut(originalOutput);
-        }
+        // Act
+        String result = command.execute(input);
+
+        // Assert
+        String expected = """
+                        Pray, employ the noble digits as thy guiding input!
+                        (Please use numerics as input only)
+                        """;
+        assertEquals(expected, result);
+        verify(toDoList, never()).remove(anyInt());
+        verify(taskStorage, never()).update(any(ToDoList.class));
     }
 
     @Test
-    public void execute_normalInput_sucess() {
-        String validInput = "2";
-        ToDoList toDoList = new ToDoList(new ArrayList<>());
-        toDoList.add(new ToDoTask("test"));
-        toDoList.add(new ToDoTask("test2"));
-        TaskStorage taskStorage = mock(TaskStorage.class);
-        DeleteCommand deleteCommand = new DeleteCommand(toDoList, taskStorage);
-        deleteCommand.execute(validInput);
-        assertEquals(1, toDoList.size(), "The size of toDoList should be 1 after successful deletion");
+    void testExecute_InputExceedsListSize_ReturnsErrorMessage() {
+        // Arrange
+        String input = "5";
+        when(toDoList.size()).thenReturn(3); // List has 3 tasks
+
+        // Act
+        String result = command.execute(input);
+
+        // Assert
+        String expected = """
+                        Thy request doth stray beyond the hallowed limits.
+                        (The number you have input is greater than the number of tasks you currently have)
+                        """;
+        assertEquals(expected, result);
+        verify(toDoList, never()).remove(anyInt());
+        verify(taskStorage, never()).update(any(ToDoList.class));
     }
 
     @Test
-    public void execute_nonNumberInputt_errorMessagePrinted() {
-        String invalidInput = "not a number";
-        String expectedMessage = "Pray, employ the noble digits as thy guiding input!\n(Please use numerics as input only)\n";
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        PrintStream originalOutput = System.out;
-        System.setOut(new PrintStream(outputStream));
-        ToDoList toDoList = new ToDoList(new ArrayList<>());
-        TaskStorage taskStorage = mock(TaskStorage.class);
-        DeleteCommand deleteCommand = new DeleteCommand(toDoList, taskStorage);
+    void testExecute_ZeroOrNegativeInput_ReturnsErrorMessage() {
+        // Arrange
+        String input = "0";
 
-        try {
-            deleteCommand.execute(invalidInput);
-            String actualOutput = outputStream.toString();
-            assertEquals(expectedMessage.trim(), actualOutput.trim(), "The printed error message for invalid input should match.");
-            verifyNoInteractions(taskStorage);
-        } finally {
-            System.setOut(originalOutput);
-        }
+        // Act
+        String result = command.execute(input);
+
+        // Assert
+        String expected = """
+                        Doth this be a jest, good sir?
+                        (0 and negative numbers are not accepted as input)
+                        """;
+        assertEquals(expected, result);
+        verify(toDoList, never()).remove(anyInt());
+        verify(taskStorage, never()).update(any(ToDoList.class));
+    }
+
+    @Test
+    void testExecute_ValidInput_DeletesTaskAndReturnsSuccessMessage() {
+        // Arrange
+        String input = "2";
+        Task mockTask = mock(Task.class);
+        when(toDoList.size()).thenReturn(3).thenReturn(2); // Size before and after deletion
+        when(toDoList.get(1)).thenReturn(mockTask); // Index 1 (input "2" is 1-based)
+        when(mockTask.toString()).thenReturn("[T][ ] Sample Task");
+
+        // Act
+        String result = command.execute(input);
+
+        // Assert
+        String expected = """
+                        Heed this decree! This noble quest hath been cast aside.
+
+                        [T][ ] Sample Task
+
+                        Lo! Thou art now bestowed with 2 noble quests upon thy parchment of duties.
+                        (You now have 2 tasks in the to do list)
+                        """;
+        assertEquals(expected, result);
+        verify(toDoList, times(1)).remove(1); // Verify remove called with index 1
+        verify(taskStorage, times(1)).update(toDoList);
+    }
+
+    @Test
+    void testExecute_NegativeInput_ReturnsErrorMessage() {
+        // Arrange
+        String input = "-1";
+
+        // Act
+        String result = command.execute(input);
+
+        // Assert
+        String expected = """
+                        Doth this be a jest, good sir?
+                        (0 and negative numbers are not accepted as input)
+                        """;
+        assertEquals(expected, result);
+        verify(toDoList, never()).remove(anyInt());
+        verify(taskStorage, never()).update(any(ToDoList.class));
     }
 }
