@@ -1,7 +1,12 @@
 package hope.gui;
 
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -10,70 +15,45 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * The {@code DialogBox} class represents a customizable dialog box component for a JavaFX
- * chatbot application. It displays a text message alongside an image, typically used to
- * represent a user or chatbot message in a conversational interface. The dialog box can
- * be flipped to adjust the alignment of the text and image for different speakers.
+ * Represents a dialog box consisting of an ImageView to represent the speaker's face
+ * and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
-
-    private Label text;
+    @FXML
+    private Label dialog;
+    @FXML
     private ImageView displayPicture;
 
-    /**
-     * Constructs a new {@code DialogBox} with the specified text and image.
-     * The text is displayed in a label with word wrapping enabled, and the image
-     * is shown in an {@code ImageView} with fixed dimensions. The default alignment
-     * places the image on the right and the text on the left.
-     *
-     * @param s The text to display in the dialog box.
-     * @param i The image to display alongside the text.
-     */
-    public DialogBox(String s, Image i) {
-        text = new Label(s);
-        displayPicture = new ImageView(i);
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+    private DialogBox(String text, Image img) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        dialog.setText(text);
+        displayPicture.setImage(img);
     }
 
     /**
-     * Flips the alignment and order of the dialog box's components, moving the image
-     * to the left and the text to the right. This is typically used to differentiate
-     * between user and chatbot messages in the conversation layout.
+     * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
-        this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(tmp);
-        this.getChildren().setAll(tmp);
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
     }
 
-    /**
-     * Creates a dialog box for the user's message with the specified text and image.
-     * The dialog box retains the default alignment (image on the right, text on the left).
-     *
-     * @param s The text of the user's message.
-     * @param i The image representing the user.
-     * @return A new {@code DialogBox} instance configured for the user's message.
-     */
-    public static DialogBox getUserDialog(String s, Image i) {
-        return new DialogBox(s, i);
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img);
     }
 
-    /**
-     * Creates a dialog box for the chatbot's (Hope's) message with the specified text
-     * and image. The dialog box is flipped to have the image on the left and the text
-     * on the right.
-     *
-     * @param s The text of the chatbot's message.
-     * @param i The image representing the chatbot.
-     * @return A new {@code DialogBox} instance configured for the chatbot's message.
-     */
-    public static DialogBox getHopeDialog(String s, Image i) {
-        var db = new DialogBox(s, i);
+    public static DialogBox getHopeDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
         db.flip();
         return db;
     }

@@ -45,7 +45,7 @@ test {
 }
 
 application {
-    mainClass.set("Hope.gui.GuiLauncher")
+    mainClass.set("hope.gui.GuiLauncher")
 }
 
 shadowJar {
