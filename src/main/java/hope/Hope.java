@@ -63,7 +63,7 @@ public class Hope {
     public String showStartupMessage() {
         return "Greetings, fair wanderer!\n"
                 + "I am Hope, your humble companion."
-                + "How might I assist thee on this grand + quest?";
+                + "How might I assist thee on this grand quest?";
     }
 
     public String getResponse(String input) {
