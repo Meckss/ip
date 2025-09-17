@@ -66,11 +66,11 @@ public class DeleteCommand implements Command {
                         """;
             }
 
-            String temporary = "Heed this decree! This noble quest hath been cast aside.\n"
+            String temporary = "Heed this decree! This noble quest hath been cast aside.\n\n"
                     + toDoList.get(input - 1).toString();
             toDoList.remove(input - 1);
             taskStorage.update(toDoList);
-            return temporary + "\nLo! Thou art now bestowed with "
+            return temporary + "\n\nLo! Thou art now bestowed with "
                     + toDoList.size()
                     + " noble quests upon thy parchment of duties.\n"
                     + "(You now have " + toDoList.size() + " tasks in the to do list)\n";

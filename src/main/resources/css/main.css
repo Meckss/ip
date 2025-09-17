@@ -6,23 +6,33 @@
 }
 
 .text-field {
-    -fx-background-color: #d9ffe2;
-    -fx-font: 20px "Arial";
+    -fx-background-color: #FFF8DC; /* Corn silk, parchment-like to match button base */
+    -fx-font: 20px "Arial"; /* Retained font and size for consistency */
+    -fx-border-color: #FFD700; /* Gold border to echo button hover state */
+    -fx-border-width: 1px; /* Subtle border for definition */
+    -fx-background-radius: 5px; /* Soft rounding for a polished look */
+    -fx-border-radius: 5px; /* Matches background radius */
+}
+
+.text-field:focused {
+    -fx-background-color: #F5F5DC; /* Slightly darker beige for focus, keeping parchment vibe */
+    -fx-border-color: #A30000; /* Dark crimson, a softer red to match button pressed state */
+    -fx-border-width: 1.5px; /* Slightly thicker for emphasis */
 }
 
 .button {
-    -fx-background-color: mediumspringgreen;
-    -fx-font: italic bold 16px "Arial";
+    -fx-background-color: #FFF8DC; /* Corn silk, parchment-like for Don Quixote's old-book chivalry */
+    -fx-font: italic bold 16px "Arial"; /* Retained font style for consistency */
 }
 
 .button:hover {
-    -fx-background-color:cyan;
-    -fx-font-size: 18px;
+    -fx-background-color: #FFD700; /* Gold for her Kindred helmet and noble aspirations */
+    -fx-font-size: 18px; /* Retained size increase for hover effect */
 }
 
 .button:pressed {
-    -fx-background-color:orange;
-    -fx-font-size: 20px;
+    -fx-background-color: #FF0000; /* Red for her tie and Kindred lance's bold energy */
+    -fx-font-size: 20px; /* Retained size increase for pressed effect */
 }
 
 .scroll-pane {

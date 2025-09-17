@@ -54,7 +54,7 @@ public class AddEventTaskCommand implements Command {
                     """;
         }
         String[] info = input.split("/from");
-        if (info.length != 2) {
+        if (info.length != 2 || info[0].isEmpty()) {
             return """
                     Alas, fair traveler, thy input bears a flaw; kindly make haste and attempt anew!
                     (Incorrect input, please try again)
@@ -70,9 +70,9 @@ public class AddEventTaskCommand implements Command {
         EventTask temp = new EventTask(info[0].trim(), toAndFrom[0].trim(), toAndFrom[1].trim());
         toDoList.add(temp);
         taskStorage.append(temp);
-        return "Behold, this quest hath been entrusted!:\n"
+        return "Behold, this quest hath been entrusted!:\n\n"
                 + temp.toString()
-                + "\nLo! Thou art now bestowed with "
+                + "\n\nLo! Thou art now bestowed with "
                 + toDoList.size()
                 + " noble quests upon thy parchment of duties.\n"
                 + "(You now have " + toDoList.size() + " tasks in the to do list)\n";

@@ -57,6 +57,14 @@ public class Hope {
             throw e;
         }
     }
+    /**
+     * Display startup message
+     */
+    public String showStartupMessage() {
+        return "Greetings, fair wanderer!\n"
+                + "I am Hope, your humble companion."
+                + "How might I assist thee on this grand + quest?";
+    }
 
     public String getResponse(String input) {
         return parser.parse(input);

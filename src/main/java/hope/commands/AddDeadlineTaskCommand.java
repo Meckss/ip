@@ -39,22 +39,22 @@ public class AddDeadlineTaskCommand implements Command {
     @Override
     public String execute(Object o) {
         String input = (String) o;
-        if (input.equals("deadline")) {
+        if (input.isEmpty()) {
             return ("Thou hast overlooked the noble task of bestowing a worthy description upon this "
                     + "endeavor!")
                     + ("(Looks like you forgot to input a description and a deadline! Try again)\n");
         }
         String[] info = input.split("/by");
-        if (info.length != 2) {
+        if (info.length != 2 || info[0].isEmpty()) {
             return "Verily, thou hast erred in thy response; endeavor once more, brave soul!"
                     + "(Incorrect input, please try again)\n";
         }
         DeadlineTask temp = new DeadlineTask(info[0].trim(), info[1].trim());
         toDoList.add(temp);
         taskStorage.append(temp);
-        return "Behold, this quest hath been entrusted!\n"
+        return "Behold, this quest hath been entrusted!\n\n"
                 + temp.toString()
-                + "\nLo! Thou art now bestowed with "
+                + "\n\nLo! Thou art now bestowed with "
                 + toDoList.size()
                 + " noble quests upon thy parchment of duties.\n"
                 + "(You now have " + toDoList.size() + " tasks in the list)\n";

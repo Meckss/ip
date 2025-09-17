@@ -46,9 +46,9 @@ public class AddFixedDurationTaskCommand implements Command {
         FixedDurationTask temp = new FixedDurationTask(info[0].trim(), info[1].trim());
         toDoList.add(temp);
         taskStorage.append(temp);
-        return "Behold, this quest hath been entrusted!\n"
+        return "Behold, this quest hath been entrusted!\n\n"
                 + temp.toString()
-                + "\nLo! Thou art now bestowed with "
+                + "\n\nLo! Thou art now bestowed with "
                 + toDoList.size()
                 + " noble quests upon thy parchment of duties.\n"
                 + "(You now have " + toDoList.size() + " tasks in the list)\n";

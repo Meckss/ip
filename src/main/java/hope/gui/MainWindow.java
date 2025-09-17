@@ -24,7 +24,7 @@ public class MainWindow extends AnchorPane {
     private Hope hope;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/dante.jpeg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/donquixote.jpeg"));
+    private Image hopeImage = new Image(this.getClass().getResourceAsStream("/images/donquixote.jpeg"));
 
     @FXML
     public void initialize() {
@@ -34,6 +34,7 @@ public class MainWindow extends AnchorPane {
     /** Injects the Duke instance */
     public void setDuke(Hope d) {
         hope = d;
+        dialogContainer.getChildren().add(DialogBox.getHopeDialog(d.showStartupMessage(), hopeImage));
     }
 
     /**
@@ -46,7 +47,7 @@ public class MainWindow extends AnchorPane {
         String response = hope.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getHopeDialog(response, dukeImage)
+                DialogBox.getHopeDialog(response, hopeImage)
         );
         userInput.clear();
     }
