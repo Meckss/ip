@@ -120,3 +120,4 @@ This is a concise summary of all commands supported by the **Hope** chatbot for 
 - Credits for Don Quixote image goes to bean_dobe: https://x.com/bean_dobe?lang=en
 - Credits for Dante image goes to Sansti24: https://www.reddit.com/r/limbuscompany/comments/16zy6uf/dante_chibi/
 - Credits for background photo goes to Project Moon
+- Credits to https://se-education.org/guides/tutorials/javaFx.html for gui implementation
